@@ -92,6 +92,7 @@ class LeakyRelu(ActivationFunction):
 
 
 class Elu(ActivationFunction):
+
     def __init__(self, alpha=0.01):
         """
         :param alpha: scalar, default = 0.01
@@ -115,7 +116,6 @@ class Elu(ActivationFunction):
         Output:
             - a list x that it's composed by 1 if the value is > 0, otherwise
             (the value of elu function with the same alpha + alpha).
-        :param self:
         :param x:
         :return:
         """
@@ -132,10 +132,11 @@ class Elu(ActivationFunction):
 
 
 class Sigmoid(ActivationFunction):
+
     def output(self, x):
         """
         The function sigmoid_function takes in input x that it is a list.
-    Output:
+        Output:
         - a list x s.t. for each element inside x we compute 1 / (1 + e^-i)
         :param x:
         :return:
@@ -157,6 +158,7 @@ class Sigmoid(ActivationFunction):
 
 
 class Tanh(ActivationFunction):
+
     def output(self, x):
         """
         The function tanh_function takes in input x that it is a list.
@@ -170,8 +172,9 @@ class Tanh(ActivationFunction):
 
     def tanh_deriv(self, x):
         """
-         The function tanh_deriv takes in input x that it is a list and compute the derivative.
-    Output:
+        The function tanh_deriv takes in input x that it is a list and compute the derivative.
+
+        Output:
         - a list x s.t. for each v we have (1 - tanh(v)^2).
         :param self:
         :param x:
