@@ -37,13 +37,22 @@ class Layer:
         return self.act_fun.output(self.net)
 
     def back_propagate(self, back):
+        """
+        δ = back * f'(net)
+
+        :param back: back propagated sum
+        :return: δ w
+        """
         self.back = back
         self.delta = back * self.act_fun.derivative(self.net)
 
         # send to prev layer
         return np.dot(self.delta, np.transpose(self.w))
 
-    def update_w(self, ETA, LAMBDA, ALPHA, nesterov=False):
+    def update_w(self, ETA, optimizer):
+        optimizer(self, ETA)
+
+    '''def update_w(self, ETA, LAMBDA, ALPHA, nesterov=False):
         """
         To update weights we use x=O_u in (Δ w_t,u = δ_t * O_u)
         :param nesterov:
@@ -75,4 +84,4 @@ class Layer:
             self.delta = self.back * self.act_fun.derivative(np.dot(nest_w, np.append(self.x, 1)))
         self.delta_w = ETA * np.dot(np.transpose(self.x), self.delta) + ALPHA * self.delta_w
         # todo: remove bias from regularizer
-        self.w = self.w + self.delta_w - LAMBDA * self.w
+        self.w = self.w + self.delta_w - LAMBDA * self.w'''

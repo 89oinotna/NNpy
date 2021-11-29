@@ -7,7 +7,7 @@ class NeuralNetwork:
 
     def __init__(self, layer_sizes: list, input_size: int, act_h: ActivationFunction, act_o: ActivationFunction,
                  w_init: str,
-                 ETA: float, LAMBDA: float, ALPHA: float, loss: str, task_type: str):
+                 ETA: float, LAMBDA: float, ALPHA: float, loss: str, task_type: str, optimizer):
         """
         :param layer_sizes:
         :param input_size:
@@ -27,9 +27,10 @@ class NeuralNetwork:
         """
         self.task_type = task_type
         self.loss = loss
-        self.ALPHA = ALPHA
+        #self.ALPHA = ALPHA
         self.ETA = ETA
-        self.LAMBDA = LAMBDA
+        #self.LAMBDA = LAMBDA
+        self.optimizer = optimizer
 
         # initialize layers
         self.layers = []
@@ -45,7 +46,8 @@ class NeuralNetwork:
     def back_propagate(self, back):
         for layer in reversed(self.layers):
             back = layer.back_propagate(back)
-            layer.update_w(self.ETA, self.LAMBDA, self.ALPHA)
+            layer.update_w(self.ETA, self.optimizer)
+            #layer.update_w(self.ETA, self.LAMBDA, self.ALPHA)
 
     def train(self, data_in, data_out):
         """
