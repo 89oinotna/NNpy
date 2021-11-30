@@ -49,8 +49,7 @@ class Layer:
         # send to prev layer
         return np.dot(self.delta, np.transpose(self.w))
 
-    def update_w(self, ETA, optimizer):
-        optimizer(self, ETA)
+
 
     '''def update_w(self, ETA, LAMBDA, ALPHA, nesterov=False):
         """
