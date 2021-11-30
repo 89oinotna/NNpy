@@ -4,6 +4,7 @@ from activation_functions import ActivationFunction
 from loss import Loss
 from metrics import Metric
 
+
 class NeuralNetwork:
     """
     task_type:  regression -> output linear units
@@ -27,7 +28,7 @@ class NeuralNetwork:
 
         self.loss = loss
         self.optimizer = optimizer
-
+        self.metric = metric
         # initialize layers
         self.layers = []
         for i, l in enumerate(reversed(layer_sizes.append(input_size)[:-1])):

@@ -4,7 +4,12 @@
 """
 
 
-class Tikonov:
+class WeightRegularizer:
+    def __call__(self, *args, **kwargs):
+        pass
+
+
+class Tikonov(WeightRegularizer):
     """
     Loss = error + penalty to separate eta
     """
@@ -14,8 +19,7 @@ class Tikonov:
 
     def __call__(self, w):
         """
-
         :param w: weights
         :return:
         """
-        return - self.LAMBDA * w
+        return w - self.LAMBDA * w

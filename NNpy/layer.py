@@ -27,7 +27,6 @@ class Layer:
 
     def feed_forward(self, x):
         """
-
         :param x: input
         :return:
         """
