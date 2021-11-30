@@ -10,9 +10,7 @@ class WeightRegularizer:
 
 
 class Tikonov(WeightRegularizer):
-    """
-    Loss = error + penalty to separate eta
-    """
+
 
     def __init__(self, LAMBDA):
         self.LAMBDA = LAMBDA
