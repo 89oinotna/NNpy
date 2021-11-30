@@ -6,9 +6,9 @@ import weights_init as winit
 
 class Layer:
     """
-    This is a test class for dataclasses.
+    Class that identifies the layer of a fully connected neural network
 
-    This is the body of the docstring description.
+    Each layer has its weights matrix w
 
         Args:
             - num_unit (int): number of units of the layer.
@@ -18,7 +18,7 @@ class Layer:
 
     """
 
-    def __init__(self, num_unit: int, num_input, act_fun: ActivationFunction, w_init):
+    def __init__(self, num_unit: int, num_input, act_fun: ActivationFunction, w_init:str):
         self.x = np.zeros((num_input, 0))
         self.net = np.zeros((num_input, 0))
         self.delta_w = np.zeros((num_input, 0))
@@ -27,8 +27,12 @@ class Layer:
 
     def feed_forward(self, x):
         """
-        :param x: input
-        :return:
+        Computes the output of the layer
+
+        Stores the input x and the net result
+
+        :param x: input matrix
+        :return: output of the layer
         """
         self.x = x
         self.net = np.dot(self.w, np.append(x, 1))
@@ -37,10 +41,10 @@ class Layer:
 
     def back_propagate(self, back):
         """
-        δ = back * f'(net)
+        Computes δ = back * f'(net)
 
         :param back: back propagated sum
-        :return: δ w
+        :return: δ w to back propagate to previous layer
         """
         self.back = back
         self.delta = back * self.act_fun.derivative(self.net)

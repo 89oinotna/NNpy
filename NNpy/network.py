@@ -45,15 +45,15 @@ class NeuralNetwork:
             back = layer.back_propagate(back)
             self.optimizer(layer)
 
-    def train(self, data_in, label):
+    def train(self, x, label):
         """
         for mini batch consider the gradient over different examples
         (moving average of the past gradients)
 
-        :param data_in:
+        :param x:
         :param label:
         :return:
         """
-        output = self.feed_forward(data_in)
+        output = self.feed_forward(x)
         diff = self.loss.derivative(label, output)
         self.back_propagate(diff)

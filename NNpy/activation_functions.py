@@ -170,7 +170,7 @@ class Tanh(ActivationFunction):
         """
         return np.tan(x)
 
-    def tanh_deriv(self, x):
+    def derivative(self, x):
         """
         The function tanh_deriv takes in input x that it is a list and compute the derivative.
 
