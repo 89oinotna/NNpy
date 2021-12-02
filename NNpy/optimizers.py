@@ -9,7 +9,7 @@ class Optimizer:
 
 class SGD(Optimizer):
     # todo implement variable learning rate
-    def __init__(self, ETA, weight_regularizer: WeightRegularizer = None, ALPHA: float = 0, nesterov: bool = False):
+    def __init__(self, ETA=0.001, weight_regularizer: WeightRegularizer = None, ALPHA: float = 0, nesterov: bool = False):
         self.ETA = ETA
         self.nesterov = nesterov
         self.ALPHA = ALPHA
@@ -24,9 +24,13 @@ class SGD(Optimizer):
             # apply the momentum
             nest_w = layer.w + self.ALPHA * layer.delta_w
             # new delta
-            layer.delta = layer.back * layer.act_fun.partial_derivative(np.dot(nest_w, np.append(layer.x, 1)))
+            layer.delta = layer.back * layer.act_fun.partial_derivative(np.dot(nest_w, layer.x))
 
-        layer.delta_w = self.ETA * np.dot(np.transpose(layer.x), layer.delta) + self.ALPHA * layer.delta_w
-        # todo: remove bias b from regularizer or provide a different lambda for it
-        layer.w = layer.w + layer.delta_w
-        layer.w = self.weight_regularizer(layer.w)  # - LAMBDA * layer.w
+        #print(np.dot(np.transpose(layer.x), layer.delta))
+        layer.delta_w = self.ETA * np.dot( np.transpose(layer.delta), layer.x)
+        layer.delta_w += self.ALPHA * layer.delta_w # momentum
+        layer.w += layer.delta_w
+
+        # remove bias b from regularizer or provide a different lambda for it
+        if self.weight_regularizer is not None:
+            layer.w[0:, :-1] = self.weight_regularizer(layer.w[0:, :-1])  # - LAMBDA * layer.w
