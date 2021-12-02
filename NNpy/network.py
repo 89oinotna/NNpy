@@ -3,7 +3,7 @@ from layer import Layer
 from activation_functions import ActivationFunction
 from loss import Loss
 from metrics import Metric
-from optimizers import Optimizer
+import optimizers as opt
 
 '''
 regression: output linear units 
@@ -32,14 +32,16 @@ class NeuralNetwork:
     """
 
     def __init__(self, layer_sizes: list, input_size: int, act_hidden: ActivationFunction, act_out: ActivationFunction,
-                 w_init: str, loss: Loss, metric: Metric, optimizer: Optimizer):
+                 w_init: str, loss: Loss, metric: Metric,  optimizer: opt.Optimizer = opt.SGD(), epochs=None, weights = None):
 
         self.loss = loss
         self.optimizer = optimizer
         self.metric = metric
+        self.epochs = epochs
         # initialize layers
         self.layers = []
         # reverse and add the input size
+        
         layer_sizes.reverse()
         layer_sizes.append(input_size)
         """ 
@@ -50,7 +52,7 @@ class NeuralNetwork:
             self.layers.append(Layer(l, layer_sizes[i + 1], act_out if i == 0 else act_hidden, w_init))
         # reverse the layers since they are created backward and remove the input size
         self.layers.reverse()
-        self.layers = self.layers[1:]
+        #self.layers = self.layers[1:]
 
     def feed_forward(self, x):
         """
@@ -71,15 +73,27 @@ class NeuralNetwork:
             back = layer.back_propagate(back)
             self.optimizer(layer)
 
-    def fit(self, x, label):
+    def fit(self, tr_data, tr_label, vl_data=None, vl_label=None):
         """
         training algorithm
-        :param x: input of the network
-        :param label: expected output
+        :param tr_data:
+        :param tr_label:
+        :param vl_data:
+        :param vl_label:
+        :return:
         """
+        self.tr_res = []
+        self.vl_res = []
 
         # todo: for mini batch consider the gradient over different examples (moving average of the past gradients)
+        for i in range(self.epochs):
+            output = self.feed_forward(tr_data)
+            diff = self.loss.partial_derivative(tr_label, output)
+            self.back_propagate(diff)
+            self.tr_res.append(self.metric(tr_label, output))
 
-        output = self.feed_forward(x)
-        diff = self.loss.partial_derivative(label, output)
-        self.back_propagate(diff)
+            if vl_data is not None:
+                output = self.feed_forward(tr_data)
+                self.vl_res.append(self.metric(vl_label, output))
+
+        return self.tr_res
