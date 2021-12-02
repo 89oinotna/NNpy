@@ -56,7 +56,6 @@ def random_ranged_init(num_unit, num_input, range=(-0.7, 0.7)):
 
 
 def xavier_init(num_unit, num_input):
-
     bias_weights = np.zeros((num_unit, 1))
     input_weights = np.random.randn(num_unit, num_input) * np.sqrt(1 / num_input)
     matrix_weights = np.concatenate((bias_weights, input_weights), axis=1)
@@ -83,7 +82,6 @@ def xavier_init(num_unit, num_input):
 
 
 def he_init(num_unit, num_input):
-
     bias_weights = np.zeros((num_unit, 1))
     input_weights = np.random.randn(num_unit, num_input) * np.sqrt(2 / num_input)
     matrix_weights = np.concatenate((bias_weights, input_weights), axis=1)
