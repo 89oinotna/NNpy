@@ -11,7 +11,6 @@ class WeightRegularizer:
 
 class Tikonov(WeightRegularizer):
 
-
     def __init__(self, LAMBDA):
         self.LAMBDA = LAMBDA
 
@@ -20,4 +19,4 @@ class Tikonov(WeightRegularizer):
         :param w: weights
         :return:
         """
-        return w - self.LAMBDA * w
+        return w - 2 * self.LAMBDA * w

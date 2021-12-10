@@ -19,9 +19,7 @@ class Layer:
     """
 
     def __init__(self, num_unit: int, num_input, act_fun: ActivationFunction, w_init:str):
-        self.x = np.zeros((num_input, 1))
-        self.net = np.zeros((num_input, 1))
-        self.delta_w = np.zeros((num_unit, num_input+1))
+        self.delta_w = np.zeros((num_unit, num_input+1)) # + bias
         self.w = winit.weights_init(w_init, num_unit=num_unit, num_input=num_input)
         self.act_fun = act_fun
 
@@ -34,8 +32,8 @@ class Layer:
         :param x: input matrix
         :return: output of the layer
         """
-        self.x = np.append(x, np.ones((x.shape[0], 1)), axis=1)
-        self.net = np.dot(self.x, np.transpose(self.w))  # add 1 as bias input
+        self.x = np.append(x, np.ones((x.shape[0], 1)), axis=1) # add 1 as bias input
+        self.net = np.dot(self.x, np.transpose(self.w))
         return self.act_fun.output(self.net)
 
     def back_propagate(self, back):

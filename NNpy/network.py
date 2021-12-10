@@ -4,6 +4,7 @@ from activation_functions import ActivationFunction
 from loss import Loss
 from metrics import Metric
 import optimizers as opt
+import regularization as reg
 
 '''
 regression: output linear units 
@@ -32,7 +33,7 @@ class NeuralNetwork:
     """
 
     def __init__(self, layer_sizes: list, input_size: int, act_hidden: ActivationFunction, act_out: ActivationFunction,
-                 w_init: str, loss: Loss, metric: Metric,  optimizer: opt.Optimizer = opt.SGD(), epochs=None, weights = None):
+                 w_init: str, loss: Loss, metric: Metric,  optimizer: opt.Optimizer = opt.SGD(weight_regularizer=reg.Tikonov(0.5)), epochs=None):
 
         self.loss = loss
         self.optimizer = optimizer
@@ -41,7 +42,7 @@ class NeuralNetwork:
         # initialize layers
         self.layers = []
         # reverse and add the input size
-        
+
         layer_sizes.reverse()
         layer_sizes.append(input_size)
         """ 
@@ -52,7 +53,6 @@ class NeuralNetwork:
             self.layers.append(Layer(l, layer_sizes[i + 1], act_out if i == 0 else act_hidden, w_init))
         # reverse the layers since they are created backward and remove the input size
         self.layers.reverse()
-        #self.layers = self.layers[1:]
 
     def feed_forward(self, x):
         """
