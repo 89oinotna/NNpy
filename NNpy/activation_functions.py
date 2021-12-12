@@ -12,6 +12,18 @@ import numpy as np
 
 # For each of them have been developed even the derivative
 
+def activation_function(type_init, **kwargs):
+    init = {
+        'id': lambda **kwargs: Identity(),
+        'relu': lambda **kwargs: Relu(),
+        'leaky': lambda **kwargs:LeakyRelu,
+        'elu': lambda **kwargs:Elu(),
+        'sigmoid': lambda **kwargs:Sigmoid(),
+        'tanh': lambda **kwargs:Tanh()
+    }
+    matrix = init[type_init](**kwargs)
+    return matrix
+
 
 class ActivationFunction:
     """
@@ -43,7 +55,8 @@ class Identity(ActivationFunction):
         :return: a list x that it's composed by all 1s.
         """
         der = [1.] * len(x)
-        return der
+        # return der
+        return 1
 
 
 class Relu(ActivationFunction):
@@ -56,7 +69,8 @@ class Relu(ActivationFunction):
         :param x:
         :return:
         """
-        return [np.maximum(0, i) for i in x]
+        # return [np.maximum(0, i) for i in x]
+        return np.maximum(x, 0)
 
     def derivative(self, x):
         """
@@ -66,7 +80,8 @@ class Relu(ActivationFunction):
         :param x:
         :return:
         """
-        return [0 if i <= 0 else 1 for i in x]
+        # return [0 if i <= 0 else 1 for i in x]
+        return np.greater(x, 0)
 
 
 class LeakyRelu(ActivationFunction):
@@ -141,9 +156,10 @@ class Sigmoid(ActivationFunction):
         :param x:
         :return:
         """
-        num = [1.] * len(x)
-        den = [np.add(1, np.exp(-i)) for i in x]
-        return np.divide(num, den)
+        # num = [1.] * len(x)
+        # den = [np.add(1, np.exp(-i)) for i in x]
+        # return np.divide(num, den)
+        return 1 / (1 + np.exp(-x))
 
     def derivative(self, x):
         """
@@ -154,7 +170,8 @@ class Sigmoid(ActivationFunction):
         :return:
         """
         fx = self.output(x)
-        return np.multiply(fx, (np.subtract(1, fx)))
+        # return np.multiply(fx, (np.subtract(1, fx)))
+        return fx * (1 - fx)
 
 
 class Tanh(ActivationFunction):
@@ -168,7 +185,7 @@ class Tanh(ActivationFunction):
         :param x:
         :return:
         """
-        return np.tan(x)
+        return np.tanh(x)
 
     def derivative(self, x):
         """
@@ -180,4 +197,4 @@ class Tanh(ActivationFunction):
         :param x:
         :return:
         """
-        return np.subtract(1, np.power(np.tan(x), 2))
+        return np.subtract(1, np.power(np.tanh(x), 2))

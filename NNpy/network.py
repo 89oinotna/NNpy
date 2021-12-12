@@ -1,8 +1,8 @@
 import numpy as np
 from layer import Layer
-from activation_functions import ActivationFunction
-from loss import Loss
-from metrics import Metric
+import activation_functions as af
+import losses as l
+import metrics as m
 import optimizers as opt
 import regularization as reg
 
@@ -32,8 +32,10 @@ class NeuralNetwork:
             - optimizer (Optimizer): optimizer used to learn
     """
 
-    def __init__(self, layer_sizes: list, input_size: int, act_hidden: ActivationFunction, act_out: ActivationFunction,
-                 w_init: str, loss: Loss, metric: Metric,  optimizer: opt.Optimizer = opt.SGD(weight_regularizer=reg.Tikonov(0.5)), epochs=None):
+    def __init__(self, layer_sizes: list, input_size: int, act_hidden: af.ActivationFunction,
+                 act_out: af.ActivationFunction,
+                 w_init: str, loss: l.Loss, metric: m.Metric,
+                 optimizer: opt.Optimizer = opt.SGD(weight_regularizer=reg.Tikonov(0.5)), epochs: int = None):
 
         self.loss = loss
         self.optimizer = optimizer
@@ -53,6 +55,16 @@ class NeuralNetwork:
             self.layers.append(Layer(l, layer_sizes[i + 1], act_out if i == 0 else act_hidden, w_init))
         # reverse the layers since they are created backward and remove the input size
         self.layers.reverse()
+
+    @staticmethod
+    def init(layer_sizes: list, input_size: int, act_hidden: str, act_out: str,
+             w_init: str, loss: str, metric: str, optimizer: str, epochs=None, **kwargs):
+        act_hidden = af.activation_function(act_hidden, **kwargs)
+        act_out = af.activation_function(act_out, **kwargs)
+        loss = l.loss(loss, **kwargs)
+        metric = m.metric(metric, **kwargs)
+        optimizer = opt.optimizer(optimizer, **kwargs)
+        return NeuralNetwork(layer_sizes, input_size, act_hidden, act_out, w_init, loss, metric, optimizer, epochs)
 
     def feed_forward(self, x):
         """
@@ -82,18 +94,24 @@ class NeuralNetwork:
         :param vl_label:
         :return:
         """
-        self.tr_res = []
-        self.vl_res = []
+        tr_loss = []
+        tr_metric = []
+        vl_loss = []
+        vl_metric = []
 
         # todo: for mini batch consider the gradient over different examples (moving average of the past gradients)
         for i in range(self.epochs):
             output = self.feed_forward(tr_data)
             diff = self.loss.partial_derivative(tr_label, output)
             self.back_propagate(diff)
-            self.tr_res.append(self.metric(tr_label, output))
+            tr_loss.append(self.loss.error(tr_label, output))
+            tr_metric.append(self.metric(tr_label, output))
 
             if vl_data is not None:
                 output = self.feed_forward(tr_data)
-                self.vl_res.append(self.metric(vl_label, output))
+                vl_loss.append(self.loss.error(vl_label, output))
+                vl_metric.append(self.metric(vl_label, output))
 
-        return self.tr_res
+        if vl_data is not None:
+            return (tr_metric, tr_loss), (vl_metric, vl_loss)
+        return tr_metric, tr_loss

@@ -1,6 +1,15 @@
 import numpy as np
 
 
+def metric(type_init, **kwargs):
+    init = {
+        'mee': MEE,
+        'simple_class':lambda **kwargs: SimpleClassification()
+    }
+    matrix = init[type_init](**kwargs)
+    return matrix
+
+
 class Metric:
     def __call__(self, label, output):
         pass
@@ -27,8 +36,7 @@ class MEE(RegressionMetric):
         return np.mean(np.sqrt(np.sum(np.square(label - output), axis=1)))
 
 
-
-class SimpleAccuracy(ClassificationMetric):
+class SimpleClassification(ClassificationMetric):
     def accuracy(self, label: np.ndarray, output: np.ndarray):
         output = np.around(output)
         return np.sum(([1 if out == lab else 0 for lab, out in zip(label, output)])) / len(label)

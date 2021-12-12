@@ -11,10 +11,9 @@ def read_monk(filename):
     monk_dataset = pd.read_csv(dir_path+"/datasets/"+str(filename), sep=" ", names=['class', 'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'id'])
     monk_dataset.set_index('id', inplace=True)
     monk_dataset = monk_dataset.sample(frac=1)
-    labels = monk_dataset.pop('class')
+    labels = monk_dataset.pop('class').to_frame().values
 
     monk_dataset = OneHotEncoder().fit_transform(monk_dataset).toarray().astype(np.float32)
-
     return monk_dataset, labels
 
 

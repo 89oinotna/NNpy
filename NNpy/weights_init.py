@@ -3,9 +3,10 @@ import numpy as np
 
 def weights_init(type_init, **kwargs):
     init = {
-        'random ranged': random_ranged_init,
+        'random_ranged': random_ranged_init,
         'xavier': xavier_init,
-        'he': he_init
+        'he': he_init,
+        'monk': monk_init
     }
     matrix_weights = init[type_init](**kwargs)
     return matrix_weights
@@ -27,7 +28,14 @@ def weights_init(type_init, **kwargs):
 '''
 
 
-def random_ranged_init(num_unit, num_input, range=(-0.7, 0.7)):
+def monk_init(num_unit, num_input):
+    input_weights = np.random.randn(num_unit, num_input) * 0.003
+    bias_weights = np.zeros([num_unit, 1])
+    matrix_weights = np.concatenate((input_weights, bias_weights), axis=1)
+    return matrix_weights
+
+
+def random_ranged_init(num_unit, num_input, range=(-0.7, 0.7), **kwargs):
     min_range, max_range = range[0], range[1]
     if min_range > max_range:
         raise ValueError('The min value must be <= than the max value')
@@ -86,3 +94,5 @@ def he_init(num_unit, num_input):
     input_weights = np.random.randn(num_unit, num_input) * np.sqrt(2 / num_input)
     matrix_weights = np.concatenate((input_weights, bias_weights), axis=1)
     return matrix_weights
+
+

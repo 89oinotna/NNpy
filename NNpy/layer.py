@@ -44,12 +44,11 @@ class Layer:
         :param back: back propagated sum
         :return: δ w to back propagate to previous layer
         """
-        self.back = back
+        self.back=back
         self.delta = back * self.act_fun.derivative(self.net)
 
-
         # send to prev layer
-        return np.dot(self.delta, self.w[0:, :-1])
+        return np.dot(self.delta, self.w[:, :-1])
 
 
 
