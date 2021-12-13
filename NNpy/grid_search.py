@@ -14,7 +14,6 @@ from normalization import normalize, denormalize
 from ensembling import Bagging
 import regularization as reg
 
-# import learning_rate as lr
 
 
 # Params used to do our GridSearch on our NN model (# of combinations = Cartesian product between params_grid entries)
@@ -222,7 +221,7 @@ def final_model():
 
     # training all the models in the ensemble
 
-    ensemble.fit(training_examples, test_examples)
+    ensemble.fit(train_data, train_label, test_examples)
 
     # check models performance (denormalizing)
     MEE = metrics.MEE()
