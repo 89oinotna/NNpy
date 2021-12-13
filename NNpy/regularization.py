@@ -4,6 +4,14 @@
 """
 
 
+def regularizer(type_init, **kwargs):
+    init = {
+        'tikonov': Tikonov
+    }
+    matrix = init[type_init](**kwargs)
+    return matrix
+
+
 class WeightRegularizer:
     def __call__(self, *args, **kwargs):
         pass
@@ -11,8 +19,7 @@ class WeightRegularizer:
 
 class Tikonov(WeightRegularizer):
 
-
-    def __init__(self, LAMBDA):
+    def __init__(self, LAMBDA, **kwargs):
         self.LAMBDA = LAMBDA
 
     def __call__(self, w):
@@ -20,4 +27,4 @@ class Tikonov(WeightRegularizer):
         :param w: weights
         :return:
         """
-        return w - self.LAMBDA * w
+        return w - 2 * self.LAMBDA * w
