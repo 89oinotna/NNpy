@@ -17,7 +17,7 @@ def read_monk(filename):
     return monk_dataset, labels
 
 
-def read_cup(training=True, test=False):
+def read_cup(training=True, test=False, frac_train=1):
 
     columns_tr_names = ['id', 'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'label_x', 'label_y']
     columns_ts_names = ['id', 'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10']
@@ -30,8 +30,12 @@ def read_cup(training=True, test=False):
     if training and not test:
         cup_tr_dataset = pd.read_csv(training_path, sep=",", names=columns_tr_names, skiprows=7)
         cup_tr_dataset = cup_tr_dataset.sample(frac=1)
-        labels = cup_tr_dataset.pop(['label_x', 'label_y'])
-        return cup_tr_dataset, labels
+        n_rows = cup_tr_dataset.shape[0]
+        train_data = cup_tr_dataset.head(round(n_rows*frac_train))
+        test_data = cup_tr_dataset.tail(n_rows-train_data.shape[0])
+        train_labels = train_data.pop(['label_x', 'label_y'])
+        test_labels = test_data.pop(['label_x', 'label_y'])
+        return train_data, train_labels, test_data, test_labels
     if test and not training:
         cup_ts_dataset = pd.read_csv(test_path, sep=",", names=columns_ts_names, skiprows=7)
         cup_ts_dataset = cup_ts_dataset.sample(frac=1)
