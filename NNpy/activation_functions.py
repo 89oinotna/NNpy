@@ -92,17 +92,19 @@ class LeakyRelu(ActivationFunction):
         - a list x s.t. for each element inside we choose the maximum between 0.01*i and i
         :return:
         """
-        return [np.maximum(0.01 * i, i) for i in x]
+        return np.maximum(0.01 * x, x)
 
     def derivative(self, x):
         """
         The function leaky_deriv takes in input x that it is a list and compute the derivative.
-    Output:
+
+        Output:
         - a list x that it's composed by 0.01 if the value is <= 0, 1 otherwise.
         :param self:
         :param x:
         :return:
         """
+        # todo use np array
         return [0.01 if i <= 0 else 1 for i in x]
 
 
@@ -123,6 +125,7 @@ class Elu(ActivationFunction):
         :param x:
         :return:
         """
+        # todo use np array
         return [i if i > 0 else np.multiply(self.alpha, np.subtract(np.exp(i), 1)) for i in x]
 
     def derivative(self, x):
@@ -134,6 +137,7 @@ class Elu(ActivationFunction):
         :param x:
         :return:
         """
+        # todo use np array
         elu_values = self.output(x)
         j = 0
         res = []

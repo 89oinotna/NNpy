@@ -30,6 +30,7 @@ class NeuralNetwork:
             - loss (Loss): loss used for the training
             - metric (Metric): metric used for evaluation
             - optimizer (Optimizer): optimizer used to learn
+            - epochs (int): number of epochs  (Default None) if none means that we are using another way to stop
     """
 
     def __init__(self, layer_sizes: list, input_size: int, act_hidden: af.ActivationFunction,
@@ -59,6 +60,22 @@ class NeuralNetwork:
     @staticmethod
     def init(layer_sizes: list, input_size: int, act_hidden: str, act_out: str,
              w_init: str, loss: str, metric: str, optimizer: str, epochs=None, **kwargs):
+        """
+        Initializes a fully connected feed forward neural network implementation
+
+        :param layer_sizes: list of sizes for the layers, ordered first to last
+        :param input_size: size of the input
+        :param act_hidden: activation function used in hidden layers (see activation_functions.py)
+        :param act_out: activation function used in the output layer (see activation_functions.py)
+        :param w_init: weight initialization method (see weights_init) (see weights_init)
+        :param loss: loss used for the training (see losses)
+        :param metric: metric used for evaluation (see metrics)
+        :param optimizer: optimizer used to learn (Note that you will need also to insert
+                                    parameters for the optimizer, see its implementation) (see optimizers)
+        :param epochs: number of epochs  (Default None) if none means that we are using another way to stop
+        :param kwargs: other arguments needed for instance by the optimizer
+        :return:
+        """
         act_hidden = af.activation_function(act_hidden, **kwargs)
         act_out = af.activation_function(act_out, **kwargs)
         loss = l.loss(loss, **kwargs)
@@ -88,11 +105,13 @@ class NeuralNetwork:
     def fit(self, tr_data, tr_label, vl_data=None, vl_label=None):
         """
         training algorithm
-        :param tr_data:
-        :param tr_label:
-        :param vl_data:
-        :param vl_label:
-        :return:
+
+        :param tr_data: training data
+        :param tr_label: training labels
+        :param vl_data: validation data
+        :param vl_label: validation labels
+        :return: (tr_metric: list, tr_loss: list), (vl_metric: list, vl_loss: list) if a vl set has been passed
+                tr_metric: list, tr_loss: list otherwise
         """
         tr_loss = []
         tr_metric = []
