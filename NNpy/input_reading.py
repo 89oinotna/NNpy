@@ -8,7 +8,7 @@ def read_monk(filename):
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
-    monk_dataset = pd.read_csv(dir_path+"/datasets/"+str(filename), sep=" ", names=['class', 'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'id'])
+    monk_dataset = pd.read_csv(dir_path+"/datasets/monk/"+str(filename), sep=" ", names=['class', 'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'id'])
     monk_dataset.set_index('id', inplace=True)
     monk_dataset = monk_dataset.sample(frac=1)
     labels = monk_dataset.pop('class').to_frame().values

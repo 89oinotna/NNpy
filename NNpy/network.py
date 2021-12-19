@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from layer import Layer
 import activation_functions as af
 import losses as l
@@ -36,16 +37,18 @@ class NeuralNetwork:
     def __init__(self, layer_sizes: list, input_size: int, act_hidden: af.ActivationFunction,
                  act_out: af.ActivationFunction,
                  w_init: str, loss: l.Loss, metric: m.Metric,
-                 optimizer: opt.Optimizer = opt.SGD(weight_regularizer=reg.Tikonov(0.5)), epochs: int = None):
+                 optimizer: opt.Optimizer, epochs: int = None,
+                 minibatch_size=None):
 
         self.loss = loss
         self.optimizer = optimizer
         self.metric = metric
         self.epochs = epochs
+        self.minibatch_size = minibatch_size
         # initialize layers
         self.layers = []
-        # reverse and add the input size
 
+        # reverse and add the input size
         layer_sizes.reverse()
         layer_sizes.append(input_size)
         """ 
@@ -53,13 +56,15 @@ class NeuralNetwork:
         and the next value as its input size
         """
         for i, l in enumerate(layer_sizes[:-1]):
-            self.layers.append(Layer(l, layer_sizes[i + 1], act_out if i == 0 else act_hidden, w_init))
+            self.layers.append(Layer(l, layer_sizes[i + 1], act_out if i == 0 else act_hidden, w_init,
+                                     True if minibatch_size is not None else False))
         # reverse the layers since they are created backward and remove the input size
         self.layers.reverse()
 
     @staticmethod
     def init(layer_sizes: list, input_size: int, act_hidden: str, act_out: str,
-             w_init: str, loss: str, metric: str, optimizer: str, epochs=None, **kwargs):
+             w_init: str, loss: str, metric: str, optimizer: dict, weight_regularizer: dict = None, epochs=None,
+             minibatch_size:int = None, **kwargs):
         """
         Initializes a fully connected feed forward neural network implementation
 
@@ -72,16 +77,21 @@ class NeuralNetwork:
         :param metric: metric used for evaluation (see metrics)
         :param optimizer: optimizer used to learn (Note that you will need also to insert
                                     parameters for the optimizer, see its implementation) (see optimizers)
+        :param weight_regularizer: weight regularizer for the optimizer (can be None)
+        :param mminibatch_size: minibatch size (not needed for batch)
         :param epochs: number of epochs  (Default None) if none means that we are using another way to stop
         :param kwargs: other arguments needed for instance by the optimizer
         :return:
+
+
         """
         act_hidden = af.activation_function(act_hidden, **kwargs)
         act_out = af.activation_function(act_out, **kwargs)
         loss = l.loss(loss, **kwargs)
         metric = m.metric(metric, **kwargs)
-        optimizer = opt.optimizer(optimizer, **kwargs)
-        return NeuralNetwork(layer_sizes, input_size, act_hidden, act_out, w_init, loss, metric, optimizer, epochs)
+        optimizer['weight_regularizer'] = weight_regularizer
+        optimizer = opt.optimizer(**optimizer)
+        return NeuralNetwork(layer_sizes, input_size, act_hidden, act_out, w_init, loss, metric, optimizer, epochs, minibatch_size)
 
     def feed_forward(self, x):
         """
@@ -102,6 +112,12 @@ class NeuralNetwork:
             back = layer.back_propagate(back)
             self.optimizer(layer)
 
+    def step(self, data, label):
+        output = self.feed_forward(data)
+        diff = self.loss.partial_derivative(label, output)
+        self.back_propagate(diff)
+        return output
+
     def fit(self, tr_data, tr_label, vl_data=None, vl_label=None):
         """
         training algorithm
@@ -117,14 +133,32 @@ class NeuralNetwork:
         tr_metric = []
         vl_loss = []
         vl_metric = []
+        tr = None
+        if self.minibatch_size is not None:
+            tr = pd.DataFrame(np.concatenate((tr_data, tr_label), axis=1))
 
-        # todo: for mini batch consider the gradient over different examples (moving average of the past gradients)
         for i in range(self.epochs):
-            output = self.feed_forward(tr_data)
-            diff = self.loss.partial_derivative(tr_label, output)
-            self.back_propagate(diff)
-            tr_loss.append(self.loss.error(tr_label, output))
-            tr_metric.append(self.metric(tr_label, output))
+
+            if self.minibatch_size is not None:
+                # shuffling
+                tr = tr.sample(frac=1)
+                tr_data = tr.iloc[:, :-1]
+                tr_label = tr.iloc[:, -1].to_frame()
+
+                for j in range(int(np.ceil(tr.shape[0] / self.minibatch_size))):
+                    # if last minibatch is smaller than minibatch_size
+                    batch_data = tr_data.iloc[j * self.minibatch_size:(j + 1) * self.minibatch_size - 1, :]
+                    batch_label = tr_label.iloc[(j * self.minibatch_size):((j + 1) * self.minibatch_size - 1), :]
+                    self.step(batch_data, batch_label)
+                # todo add the possibility to use the mean over last n batches
+                output = self.feed_forward(tr_data)
+                tr_loss.append(self.loss.error(tr_label, output))
+                tr_metric.append(self.metric(tr_label, output))
+
+            else:
+                output = self.step(tr_data, tr_label)
+                tr_loss.append(self.loss.error(tr_label, output))
+                tr_metric.append(self.metric(tr_label, output))
 
             if vl_data is not None:
                 output = self.feed_forward(tr_data)
@@ -134,3 +168,11 @@ class NeuralNetwork:
         if vl_data is not None:
             return (tr_metric, tr_loss), (vl_metric, vl_loss)
         return tr_metric, tr_loss
+
+    """
+
+    Using mini-batch → the gradient does not decrease to zero close to a
+minimum (as the exact gradient can do)
+• Hence fixed learning rate should be avoided:
+• For instance, we can decay linearly eta for each step until iteration
+    """
