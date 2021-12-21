@@ -26,7 +26,7 @@ params_grid = {
     'regularization': [0.1, 0.01, 0.001, 0.0001],
     'learning_rates': [0.001, 0.01, 0.1, 0.2, 0.3],
     'momentum': [0.0, 0.2, 0.4, 0.6, 0.8, 0.9],
-    'batch_size': [1, 5, 10, 20, 40, 60],
+    'batch_size': [5, 10, 20, 40, 60],
     # 'optimizer': [optimizers.SGD],
     'epochs': [1500],
 }
@@ -78,12 +78,12 @@ def init_model(nn_params, num_features, output_dim):
     learning_rate = nn_params[6]
     momentum = nn_params[7]
     batch_size = nn_params[8]
-    optimizer = nn_params[9]
+    #optimizer = nn_params[9]
     epochs = nn_params[10]
 
     # Create NN object model
     model = NeuralNetwork(layer_sizes, num_features, activation, act_fun.Identity, w_init, loss, accuracy,
-                          opt.SGD(weight_regularizer=reg.Tikonov(regularization)), epochs)
+                          opt.SGD(ETA=learning_rate, weight_regularizer=reg.Tikonov(regularization), ALPHA=momentum), epochs, batch_size)
 
     return model
 
