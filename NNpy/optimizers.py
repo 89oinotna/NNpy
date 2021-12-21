@@ -19,10 +19,16 @@ class Optimizer:
 
 class SGD(Optimizer):
     """
-    todo implement variable learning rate
-    Using mini-batch → the gradient does not decrease to zero close to a
-minimum (as the exact gradient can do)
-• Hence fixed learning rate should be avoided
+    Class that identifies the SGD optimizer
+
+        Args:
+            - ETA (float): learning rate
+            - weight_regularizer (WeightRegularizer): weight regularizer (optional)
+            - ALPAH (float): for the momentum
+            - nesterov (bool): True for nesterov momentum
+            - momentum_window (int): size of the window to consider for the momentum when using minibatch
+            - variable_eta (dict): when using minibatch (should contain: eta_taua and tau)
+
     """
 
     def __init__(self, ETA=0.01, weight_regularizer: reg.WeightRegularizer = None, ALPHA: float = 0.5,
@@ -82,6 +88,7 @@ minimum (as the exact gradient can do)
         Using mini-batch → the gradient does not decrease to zero close to a
         minimum (as the exact gradient can do)
         • Hence fixed learning rate should be avoided:
+        Set-up: eta_tau as ~1% of eta_0, tau few hundred steps
         """
         if self.variable_eta['step'] < self.variable_eta['tau']:
             self.variable_eta['step'] += 1
