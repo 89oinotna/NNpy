@@ -24,7 +24,7 @@ class SGD(Optimizer):
         Args:
             - ETA (float): learning rate
             - weight_regularizer (WeightRegularizer): weight regularizer (optional)
-            - ALPAH (float): for the momentum
+            - ALPHA (float): for the momentum (eg 0 < 0.5 - 0.9 < 1) allows to use higher eta
             - nesterov (bool): True for nesterov momentum
             - momentum_window (int): size of the window to consider for the momentum when using minibatch
             - variable_eta (dict): when using minibatch (should contain: eta_taua and tau)
@@ -33,7 +33,8 @@ class SGD(Optimizer):
 
     def __init__(self, ETA=0.01, weight_regularizer: reg.WeightRegularizer = None, ALPHA: float = 0.5,
                  nesterov: bool = False, momentum_window: int = None, variable_eta: dict = None):
-        variable_eta['eta'] = ETA  # eta 0
+        if variable_eta is not None:
+            variable_eta['eta'] = ETA  # eta 0
         self.variable_eta = variable_eta
         self.ETA = ETA
         self.nesterov = nesterov
