@@ -54,7 +54,7 @@ class Identity(ActivationFunction):
         :param x: list to compute
         :return: a list x that it's composed by all 1s.
         """
-        der = [1.] * len(x)
+        #der = [1.] * len(x)
         # return der
         return 1
 
@@ -105,7 +105,8 @@ class LeakyRelu(ActivationFunction):
         :return:
         """
         # todo use np array
-        return [0.01 if i <= 0 else 1 for i in x]
+        return np.where(x >= 0, 1, 0.01)
+        #return [0.01 if i <= 0 else 1 for i in x]
 
 
 class Elu(ActivationFunction):
@@ -125,8 +126,9 @@ class Elu(ActivationFunction):
         :param x:
         :return:
         """
-        # todo use np array
-        return [i if i > 0 else np.multiply(self.alpha, np.subtract(np.exp(i), 1)) for i in x]
+
+        #return [i if i > 0 else np.multiply(self.alpha, np.subtract(np.exp(i), 1)) for i in x]
+        return np.where(x > 0, x, self.alpha * (np.exp(x) - 1.))
 
     def derivative(self, x):
         """
@@ -138,16 +140,17 @@ class Elu(ActivationFunction):
         :return:
         """
         # todo use np array
-        elu_values = self.output(x)
+        """elu_values = self.output(x)
         j = 0
-        res = []
-        for i in x:
-            if i > 0:
-                res.append(1)
-            else:
-                res.append(np.add(elu_values[j], self.alpha))
-            j += 1
-        return res
+        res = []j
+        for i in x:j
+            if i > 0:j
+                res.append(1)j
+            else:j
+                res.append(np.add(elu_valuejs[j], self.alpha))
+            j += 1j
+        return resj"""
+        return np.where(x >= 0, 1, self.output(x) + self.alpha)
 
 
 class Sigmoid(ActivationFunction):

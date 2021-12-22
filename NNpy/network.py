@@ -161,7 +161,7 @@ class NeuralNetwork:
                 tr_metric.append(self.metric(tr_label, output))
 
             if vl_data is not None:
-                output = self.feed_forward(tr_data)
+                output = self.feed_forward(vl_data)
                 vl_loss.append(self.loss.error(vl_label, output))
                 vl_metric.append(self.metric(vl_label, output))
 
