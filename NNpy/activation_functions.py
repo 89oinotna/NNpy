@@ -142,13 +142,13 @@ class Elu(ActivationFunction):
         # todo use np array
         """elu_values = self.output(x)
         j = 0
-        res = []j
-        for i in x:j
-            if i > 0:j
-                res.append(1)j
-            else:j
+        res = []
+        for i in x:
+            if i > 0:
+                res.append(1)
+            else:
                 res.append(np.add(elu_valuejs[j], self.alpha))
-            j += 1j
+            j += 1
         return resj"""
         return np.where(x >= 0, 1, self.output(x) + self.alpha)
 
