@@ -64,7 +64,7 @@ class NeuralNetwork:
     @staticmethod
     def init(layer_sizes: list, input_size: int, act_hidden: str, act_out: str,
              w_init: str, loss: str, metric: str, optimizer: dict, weight_regularizer: dict = None, epochs=None,
-             minibatch_size:int = None, **kwargs):
+             minibatch_size: int = None, **kwargs):
         """
         Initializes a fully connected feed forward neural network implementation
 
@@ -91,7 +91,8 @@ class NeuralNetwork:
         metric = m.metric(metric, **kwargs)
         optimizer['weight_regularizer'] = weight_regularizer
         optimizer = opt.optimizer(**optimizer)
-        return NeuralNetwork(layer_sizes, input_size, act_hidden, act_out, w_init, loss, metric, optimizer, epochs, minibatch_size)
+        return NeuralNetwork(layer_sizes, input_size, act_hidden, act_out, w_init, loss, metric, optimizer, epochs,
+                             minibatch_size)
 
     def feed_forward(self, x):
         """
@@ -118,7 +119,8 @@ class NeuralNetwork:
         self.back_propagate(diff)
         return output
 
-    def fit(self, tr_data, tr_label, vl_data=None, vl_label=None, early_stopping=False, monitor="vl_loss", min_delta=0.001, patience=20, mode="min"):
+    def fit(self, tr_data, tr_label, vl_data=None, vl_label=None, early_stopping=False, monitor="vl_loss",
+            min_delta=0.001, patience=20, mode="min"):
         """
         training algorithm
 
@@ -139,23 +141,29 @@ class NeuralNetwork:
         tr_metric = []
         vl_loss = []
         vl_metric = []
+        monitoring = None
         tr = None
-        if self.minibatch_size is not None:
-            tr = pd.DataFrame(np.concatenate((tr_data, tr_label), axis=1))
 
+        if self.minibatch_size is not None:  # to redo the splitting
+            tr = pd.DataFrame(np.concatenate((tr_data, tr_label), axis=1))
 
         if vl_data is not None and early_stopping:
             if mode == "min":
                 best_cost = np.infty
+                mode = min
             if mode == "max":
                 best_cost = -1
+                mode = max
             best_model: dict = {
                 "layers": None,
                 "loss": None,
                 "optimizer": None
             }
             last_improvement = 0
-
+            if monitor == 'vl_loss':
+                monitoring = vl_loss
+            elif monitor == 'vl_metric':
+                monitoring = vl_metric
 
         for i in range(self.epochs):
 
@@ -174,7 +182,6 @@ class NeuralNetwork:
                 output = self.feed_forward(tr_data)
                 tr_loss.append(self.loss.error(tr_label, output))
                 tr_metric.append(self.metric(tr_label, output))
-
             else:
                 output = self.step(tr_data, tr_label)
                 tr_loss.append(self.loss.error(tr_label, output))
@@ -188,40 +195,23 @@ class NeuralNetwork:
                 print("Vl_Loss: ", vl_loss[i])
                 print("Vl_metric: ", vl_metric[i])
                 if early_stopping:
-                    if mode == "min" and monitor == "vl_loss":
-                        if (abs(best_cost - vl_loss[i]) < min_delta):
-                            last_improvement += 1
-                            print("Not improving model (loss) ", last_improvement)
-                            if last_improvement == patience:
-                                print("No improvement found during the ", last_improvement, " last iterations, so we stopped!")
-                                self.layers = best_model["layers"]
-                                self.loss = best_model["loss"]
-                                self.optimizer = best_model["optimizer"]
-                                break
-                        else:
-                            best_cost = vl_loss[i]
-                            last_improvement = 0
-                            best_model["layers"] = self.layers
-                            best_model["loss"] = self.loss
-                            best_model["optimizer"] = self.optimizer
-                            print("The epoch ", i, " improved the model (loss)")
-                    if mode == "min" and monitor == "vl_metric":
-                        if (abs(best_cost - vl_metric[i]) < min_delta):
-                            last_improvement += 1
-                            print("Not improving model (metric) ", last_improvement)
-                            if last_improvement == patience:
-                                print("No improvement found during the ", last_improvement, " last iterations, so we stopped!")
-                                self.layers = best_model["layers"]
-                                self.loss = best_model["loss"]
-                                self.optimizer = best_model["optimizer"]
-                                break
-                        else:
-                            best_cost = vl_metric[i]
-                            last_improvement = 0
-                            best_model["layers"] = self.layers
-                            best_model["loss"] = self.loss
-                            best_model["optimizer"] = self.optimizer
-                            print("The epoch ", i, " improved the model (metric)")
+                    if abs(best_cost - monitoring[i]) < min_delta:
+                        last_improvement += 1
+                        print("Not improving model (loss) ", last_improvement)
+                        if last_improvement == patience:
+                            print("No improvement found during the ", last_improvement,
+                                  " last iterations, so we stopped!")
+                            self.layers = best_model["layers"]
+                            self.loss = best_model["loss"]
+                            self.optimizer = best_model["optimizer"]
+                            break
+                    else:
+                        best_cost = monitoring[i]
+                        last_improvement = 0
+                        best_model["layers"] = self.layers
+                        best_model["loss"] = self.loss
+                        best_model["optimizer"] = self.optimizer
+                        print("The epoch ", i, " improved the model ", monitor)
 
         if vl_data is not None:
             return (tr_metric, tr_loss), (vl_metric, vl_loss)
