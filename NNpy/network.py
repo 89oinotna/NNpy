@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 from layer import Layer
 import activation_functions as af
-import losses as l
-import metrics as m
+import losses
+import metrics
 import optimizers as opt
 import regularization as reg
 
@@ -36,7 +36,7 @@ class NeuralNetwork:
 
     def __init__(self, layer_sizes: list, input_size: int, act_hidden: af.ActivationFunction,
                  act_out: af.ActivationFunction,
-                 w_init: str, loss: l.Loss, metric: m.Metric,
+                 w_init: str, loss: losses.Loss, metric: metrics.Metric,
                  optimizer: opt.Optimizer, epochs: int = None,
                  minibatch_size=None):
 
@@ -78,7 +78,7 @@ class NeuralNetwork:
         :param optimizer: optimizer used to learn (Note that you will need also to insert
                                     parameters for the optimizer, see its implementation) (see optimizers)
         :param weight_regularizer: weight regularizer for the optimizer (can be None)
-        :param mminibatch_size: minibatch size (not needed for batch)
+        :param minibatch_size: minibatch size (not needed for batch)
         :param epochs: number of epochs  (Default None) if none means that we are using another way to stop
         :param kwargs: other arguments needed for instance by the optimizer
         :return:
@@ -87,8 +87,8 @@ class NeuralNetwork:
         """
         act_hidden = af.activation_function(act_hidden, **kwargs)
         act_out = af.activation_function(act_out, **kwargs)
-        loss = l.loss(loss, **kwargs)
-        metric = m.metric(metric, **kwargs)
+        loss = losses.loss(loss, **kwargs)
+        metric = metrics.metric(metric, **kwargs)
         optimizer['weight_regularizer'] = weight_regularizer
         optimizer = opt.optimizer(**optimizer)
         return NeuralNetwork(layer_sizes, input_size, act_hidden, act_out, w_init, loss, metric, optimizer, epochs,

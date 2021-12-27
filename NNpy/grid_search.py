@@ -74,7 +74,7 @@ def run(model, results, nn_params, dataset):
     print("Finish {} cross-validation".format(len(results)))
 
 
-def init_model(nn_params, num_features, output_dim):
+def init_model(nn_params, num_features):
     """
         Create NN model to use to execute a cross validation on it
 
@@ -86,35 +86,15 @@ def init_model(nn_params, num_features, output_dim):
         Return a NN model with also complete graph topology of the network
     """
     print(nn_params)
-    layer_sizes = nn_params[0]
-    activation = nn_params[1]
-    w_init = nn_params[2]
-    loss = nn_params[3]
-    accuracy = nn_params[4]
-    regularization = nn_params[5]
-    learning_rate = nn_params[6]
-    momentum = nn_params[7]
-    batch_size = nn_params[8]
-    #optimizer = nn_params[9]
-    epochs = nn_params[9]
-    optimizer = {
-        'type_init': 'sgd',
-        'nesterov': True,
-        'ETA': learning_rate,
-        # 'momentum_window': 1,
-        'ALPHA': momentum
-    }
-    # Create NN object model
-    model = NeuralNetwork.init(layer_sizes, num_features, act_hidden = activation, act_out = "sigmoid", w_init = w_init, loss=loss, metric=accuracy,
-                          optimizer=optimizer, weight_regularizer={'type_init': 'tikonov', 'LAMBDA': regularization}, epochs=epochs)
-
+    nn_params['input_size'] = num_features
+    model = NeuralNetwork.init(**nn_params)
     return model
 
 
 #if __name__ == '__main__':
 
 
-def grid_search_cv(params, dataset, num_features, output_dim, n_threads=4, save_path='./grid.csv'):
+def grid_search_cv(params, dataset, num_features, n_threads=4, save_path='./grid.csv'):
     """
         Execute Grid Search
         Use multiprocessing library to do a parallel execution
@@ -123,27 +103,40 @@ def grid_search_cv(params, dataset, num_features, output_dim, n_threads=4, save_
             save_path(str): string of file path
 
     """
-    params = [
-        params['layer_sizes'],
-        params['activation_hidden'],
-        params['weight_initialization'],
-        params['loss'],
-        params['accuracy'],
-        params['regularization'],
-        params['learning_rates'],
-        params['momentum'],
-        params['batch_size'],
-        #params['optimizer'],
-        params['epochs']
-    ]
-    print(params)
+
+    def flatten_list(l):
+        lst = []
+        for i, v in enumerate(l):
+            if isinstance(v, dict):
+                for sublist in flatten_dict(v):
+                    lst.append(sublist)
+            else:
+                lst.append(v)
+        return lst
+
+    def flatten_dict(dic):
+        # recursively flattens the dict and return the cartesian product
+        for k, v in dic.items():
+            if isinstance(v, dict):
+                dic[k] = flatten_dict(v)
+            if isinstance(v, list):
+                dic[k] = flatten_list(v)
+        return dict_cart_prod(dic)
+
+    def dict_cart_prod(dic):
+        lst = []
+        for v in (dict(zip(dic.keys(), x)) for x in itertools.product(*dic.values())):
+            lst.append(v)
+        return lst
+
     pool = multiprocessing.Pool(multiprocessing.cpu_count()) if n_threads is None else \
         multiprocessing.Pool(n_threads)
     results = multiprocessing.Manager().list()
     print("RESULTS: ", results)
     start = time.time()
-    for nn_params in list(itertools.product(*params)):
-        model = init_model(nn_params, num_features, output_dim)
+
+    for nn_params in flatten_dict(params):
+        model = init_model(nn_params, num_features)
         print("Model:", model)
         pool.apply_async(func=run,
                          args=(model, results, nn_params, dataset))

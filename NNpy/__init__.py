@@ -7,6 +7,11 @@ import metrics
 from input_reading import read_monk
 import visualization as vis
 import grid_search as gs
+import itertools
+
+
+
+
 
 monk_data, monk_label = read_monk('monks-1.test')
 monk_data_tr, monk_data_vl = np.array_split(monk_data,2)
@@ -37,17 +42,26 @@ params = {
 }'''
 params = {
     'layer_sizes': [(5, 1), (8, 1), (10, 1), (12, 1), (14, 1), (16, 1)],
-    'activation_hidden': ["relu"],
-    'weight_initialization': ["monk"],
+    'act_hidden': ["relu"],
+    'act_out': ["sigmoid"],
+    'w_init': ["monk"],
     'loss': ["mse"],
-    'accuracy': ["simple_class"],
-    'regularization': [0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001, 0.0000001, 0.00000001],
-    'learning_rates': [0.001, 0.01, 0.1, 0.2, 0.3, 0.5, 0.6, 0.7, 0.8, 0.85],
-    'momentum': [0.0, 0.2, 0.4, 0.6, 0.7, 0.8, 0.9],
-    'batch_size': [5, 10, 20, 40, 60],
+    'metric': ["simple_class"],
+    'weight_regularizer': {'type_init':['tikonov'],
+                              'LAMBDA':[0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001, 0.0000001, 0.00000001]
+                              },
+    'optimizer': {
+        'type_init': ['sgd'],
+        'nesterov':[True],
+        'ETA':[0.001, 0.01, 0.1, 0.2, 0.3, 0.5, 0.6, 0.7, 0.8, 0.85],
+        #'momentum_window': 1,
+        'ALPHA': [0.0, 0.2, 0.4, 0.6, 0.7, 0.8, 0.9]
+    },
+    #'batch_size': [5, 10, 20, 40, 60],
     # 'optimizer': [optimizers.SGD],
     'epochs': [500, 1000, 1500]
 }
+
 train_data, train_label = read_monk("monks-1.train")
 test_data, test_label = read_monk("monks-1.test")
 training_set = list(zip(train_data, train_label))
