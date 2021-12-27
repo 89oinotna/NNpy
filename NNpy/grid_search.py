@@ -134,7 +134,7 @@ def grid_search_cv(params, dataset, num_features, n_threads=4, save_path='./grid
         print("Model:", model)
         tasks.append(pool.apply_async(func=run,
                          args=(model, results, nn_params, dataset),
-                         error_callback=print))
+                        ))
 
     for task in tasks:
         task.get()
