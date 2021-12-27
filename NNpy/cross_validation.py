@@ -72,14 +72,14 @@ def k_fold_cross_validation(model, train_set, train_label, n_folds, den_label=No
         # train the model
         (tr_metric, tr_loss), (vl_metric, vl_loss) = model_k.fit(training_set, training_label, validation_set, validation_label)
         print("Finished for k = {}".format(k))
-        if vl_loss < best_vl_err:
+        if vl_loss[-1] < best_vl_err:
             tr_err_with_best_vl_error = tr_loss
 
         # update things for the cross validation result
 
         # sum the training error that we have when we reach the minimum validation error
 
-        sum_tr_errors += tr_err_with_best_vl_error
+        sum_tr_errors += tr_err_with_best_vl_error[-1]
 
         inputs_validation = np.array([elem[0]
                                       for elem in validation_set])
@@ -99,9 +99,9 @@ def k_fold_cross_validation(model, train_set, train_label, n_folds, den_label=No
                 label=denormalize(targets_validation, den_label)
             )
         else:
-            error = vl_metric
+            error = vl_metric[-1]
 
-        errors[n_folds] = error
+        errors[k] = error
 
         results.append([(tr_metric, tr_loss), (vl_metric, vl_loss)])
 

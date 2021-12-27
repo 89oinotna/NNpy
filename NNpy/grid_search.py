@@ -172,12 +172,7 @@ def write_results(results, file_path):
                 str(item['average_accuracy_vl']),
                 str(item['sd_accuracy_vl']),
                 str(item['average_tr_error_best_vl']),
-                str(item['nn_params'][0]),
-                str(item['nn_params'][1]),
-                str(item['nn_params'][2]),
-                str(item['nn_params'][5]),
-                str(item['nn_params'][7]),
-                str(item['nn_params'][6])
+                str(item['nn_params'])
             ])
     return None
 
