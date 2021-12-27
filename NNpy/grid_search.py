@@ -47,7 +47,7 @@ test_data, test_label = read_monk("monks-1.test")
 training_set = list(zip(train_data, train_label))
 
 
-def run(model, results, nn_params, dataset):
+def run(model, results, nn_params, train_set, train_label):
     """
         Proxy function where it will start the k_fold cross validation on a configuration
         in an asynchronous way
@@ -59,7 +59,7 @@ def run(model, results, nn_params, dataset):
             Returns nothing but add result from cross validation and nn_params in results list
     """
     average_vl, sd_vl, average_tr_error_best_vl, res = cv.k_fold_cross_validation(
-        model, dataset, 5)
+        model, train_set, train_label, 5)
     print("APPEND   ", average_vl, " APPEND")
     results.append({
         'average_accuracy_vl': average_vl,
@@ -87,7 +87,7 @@ def init_model(nn_params, num_features):
     return model
 
 
-def grid_search_cv(params, dataset, num_features, n_threads=4, save_path='./grid.csv'):
+def grid_search_cv(params, train_set, train_label, num_features, n_threads=4, save_path='./grid.csv'):
     """
         Execute Grid Search
         Use multiprocessing library to do a parallel execution
@@ -133,7 +133,7 @@ def grid_search_cv(params, dataset, num_features, n_threads=4, save_path='./grid
         model = init_model(nn_params, num_features)
         print("Model:", model)
         tasks.append(pool.apply_async(func=run,
-                         args=(model, results, nn_params, dataset),
+                         args=(model, results, nn_params, train_set, train_label),
                         ))
 
     for task in tasks:
