@@ -2,6 +2,7 @@ import numpy as np
 import math
 from normalization import denormalize
 import metrics
+import copy
 #import network
 #import layer
 #import weights_init as winit
@@ -61,15 +62,13 @@ def k_fold_cross_validation(model, training_set, n_folds, den_label=None):
     splitted_dataset_indices = split(training_set, n_folds)
     for k in range(0, n_folds):
         # create a deep copy of the model passed as argument
-        model_k = model.deepcopy()
+        model_k = copy.deepcopy(model)
         # dividing training and validation set
-        training_set = training_set[:splitted_dataset_indices[k]
-        [0]] + training_set[splitted_dataset_indices[k][1]:]
-        validation_set = training_set[splitted_dataset_indices[k]
-                                 [0]:splitted_dataset_indices[k][1]]
+        training_set = training_set[:splitted_dataset_indices[k][0]] + training_set[splitted_dataset_indices[k][1]:]
+        validation_set = training_set[splitted_dataset_indices[k][0]:splitted_dataset_indices[k][1]]
 
         # train the model
-        (tr_metric, tr_loss), (vl_metric, vl_loss) = model_k.fit(training_set, validation_set)
+        (tr_metric, tr_loss), (vl_metric, vl_loss) = model_k.fit(training_set, training_set, validation_set, validation_set)
         print("Finished for k = {}".format(k))
         if vl_loss < best_vl_err:
             tr_err_with_best_vl_error = tr_loss

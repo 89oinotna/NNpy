@@ -33,7 +33,7 @@ params_grid = {
 }
 """
 params_grid = {
-    'layer_sizes': [(5, 1), (8, 1), (10,1), (12, 1), (14,1), (16, 1), (17,1), (19,1), (22, 1), (25,1)],
+    'layer_sizes': [[5, 1], [8, 1], [10, 1], [12, 1], [14, 1], [16, 1], [17, 1], [19, 1], [22, 1], [25, 1]],
     'activation_hidden': ["relu"],
     'weight_initialization': ["monk"],
     'loss': ["mse"],
@@ -64,6 +64,7 @@ def run(model, results, nn_params, dataset):
     """
     average_vl, sd_vl, average_tr_error_best_vl, res = cv.k_fold_cross_validation(
         model, dataset, 5)
+    print("APPEND   ", average_vl, " APPEND")
     results.append({
         'average_accuracy_vl': average_vl,
         'sd_accuracy_vl': sd_vl,
@@ -95,7 +96,7 @@ def init_model(nn_params, num_features, output_dim):
     momentum = nn_params[7]
     batch_size = nn_params[8]
     #optimizer = nn_params[9]
-    epochs = nn_params[10]
+    epochs = nn_params[9]
     optimizer = {
         'type_init': 'sgd',
         'nesterov': True,
@@ -112,7 +113,8 @@ def init_model(nn_params, num_features, output_dim):
 
 #if __name__ == '__main__':
 
-def grid_search_cv(params, dataset, num_features, output_dim, n_threads=4, save_path='grid_results/grid.csv'):
+
+def grid_search_cv(params, dataset, num_features, output_dim, n_threads=4, save_path='./grid.csv'):
     """
         Execute Grid Search
         Use multiprocessing library to do a parallel execution
@@ -134,10 +136,11 @@ def grid_search_cv(params, dataset, num_features, output_dim, n_threads=4, save_
         #params['optimizer'],
         params['epochs']
     ]
+    print(params)
     pool = multiprocessing.Pool(multiprocessing.cpu_count()) if n_threads is None else \
         multiprocessing.Pool(n_threads)
     results = multiprocessing.Manager().list()
-
+    print("RESULTS: ", results)
     start = time.time()
     for nn_params in list(itertools.product(*params)):
         model = init_model(nn_params, num_features, output_dim)
@@ -155,7 +158,7 @@ def grid_search_cv(params, dataset, num_features, output_dim, n_threads=4, save_
     # Write to file results obtained
     write_results(results, save_path)
 
-    with open('grid_results/grid_time.txt', 'a') as grid_time:
+    with open('./grid_time.txt', 'a') as grid_time:
         total_time = time.gmtime(time.time() - start)
         grid_time.write("Grid Search ended in {} hours {} minutes {} seconds \n".format(
             total_time.tm_hour, total_time.tm_min, total_time.tm_sec))
@@ -291,3 +294,4 @@ def final_model():
 
 final_model()
 """
+    #grid_search_cv(params_grid, training_set, len(train_data[0]), len(train_label[0]))

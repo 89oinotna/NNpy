@@ -47,7 +47,7 @@ class NeuralNetwork:
         self.minibatch_size = minibatch_size
         # initialize layers
         self.layers = []
-
+        layer_sizes = list(layer_sizes)
         # reverse and add the input size
         layer_sizes.reverse()
         layer_sizes.append(input_size)
@@ -192,8 +192,6 @@ class NeuralNetwork:
                 vl_loss.append(self.loss.error(vl_label, output))
                 vl_metric.append(self.metric(vl_label, output))
 
-                print("Vl_Loss: ", vl_loss[i])
-                print("Vl_metric: ", vl_metric[i])
                 if early_stopping:
                     if abs(best_cost - monitoring[i]) < min_delta:
                         last_improvement += 1
