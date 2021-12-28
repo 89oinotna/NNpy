@@ -27,7 +27,7 @@ def run(index, model, results, nn_params, train_set, train_label):
     """
     print(f"Starting model {index}: {nn_params}")
     average_vl, sd_vl, average_tr_error_best_vl, res = cv.k_fold_cross_validation(
-        model, train_set, train_label, 5)
+        nn_params, train_set, train_label, 5)
     res = {
         'average_metric_vl': average_vl,
         'sd_metric_vl': sd_vl,
@@ -39,7 +39,7 @@ def run(index, model, results, nn_params, train_set, train_label):
     # print("Finish {} cross-validation".format(len(results)))
 
 
-def init_model(nn_params, num_features):
+def init_model(nn_params):
     """
         Create NN model to use to execute a cross validation on it
 
@@ -50,12 +50,11 @@ def init_model(nn_params, num_features):
             
         Return a NN model with also complete graph topology of the network
     """
-    nn_params['input_size'] = num_features
     model = NeuralNetwork.init(**nn_params)
     return model
 
 
-def grid_search_cv(params, train_set, train_label, num_features, n_threads=4, save_path='./', name="grid"):
+def grid_search_cv(params, train_set, train_label,  n_threads=4, save_path='./', name="grid"):
     """
         Execute Grid Search
         Use multiprocessing library to do a parallel execution
@@ -65,7 +64,7 @@ def grid_search_cv(params, train_set, train_label, num_features, n_threads=4, sa
             name(str): name of the grid search, default will be grid_{hash(params)}
 
     """
-
+    input_size = train_set.shape[1]
     def flatten_list(l):
         lst = []
         for i, v in enumerate(l):
@@ -101,7 +100,8 @@ def grid_search_cv(params, train_set, train_label, num_features, n_threads=4, sa
     combinations = flatten_dict(params)
     print(f"Starting Grid Search: {len(combinations)} * 5 (CV) to try")
     for i, nn_params in enumerate(combinations):
-        model = init_model(nn_params, num_features)
+        nn_params['input_size'] = input_size
+        model = init_model(nn_params)
         tasks.append(pool.apply_async(func=run,
                                       args=(i, model, results, nn_params, train_set, train_label),
                                       ))

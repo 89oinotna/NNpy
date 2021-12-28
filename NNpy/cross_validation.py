@@ -1,5 +1,7 @@
 import numpy as np
 import math
+
+from NNpy.network import NeuralNetwork
 from normalization import denormalize
 import metrics
 import copy
@@ -27,6 +29,21 @@ def split(dataset, num_subsets):
 
     return [(i * num_elements_per_set, (
             i + 1) * num_elements_per_set) for i in range(0, num_subsets)]
+
+
+def init_model(nn_params):
+    """
+        Create NN model to use to execute a cross validation on it
+
+        Param:
+            nn_params(dict): dictionary of params to use to create NN object
+            num_features(int): number of features
+            output_dim(int): dimension of the output
+
+        Return a NN model with also complete graph topology of the network
+    """
+    model = NeuralNetwork.init(**nn_params)
+    return model
 
 
 def k_fold_cross_validation(model, train_set, train_label, n_folds, den_label=None):
@@ -58,8 +75,9 @@ def k_fold_cross_validation(model, train_set, train_label, n_folds, den_label=No
     # get the indexes to break down the data set into the different folds
     splitted_dataset_indices = split(train_set, n_folds)
     for k in range(0, n_folds):
-        # create a deep copy of the model passed as argument
-        model_k = copy.deepcopy(model)
+        """# create a deep copy of the model passed as argument
+        model_k = copy.deepcopy(model)"""
+        model_k = init_model(model)
         # dividing training and validation set
         training_set = np.delete(train_set, np.r_[splitted_dataset_indices[k][0]:splitted_dataset_indices[k][1]], axis=0)
         validation_set = train_set[np.r_[splitted_dataset_indices[k][0]:splitted_dataset_indices[k][1]]]
