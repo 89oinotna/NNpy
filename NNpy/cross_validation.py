@@ -3,10 +3,7 @@ import math
 from normalization import denormalize
 import metrics
 import copy
-#import network
-#import layer
-#import weights_init as winit
-#import activation_functions as act_fun
+import logging
 
 
 def fold_i_of_k(dataset, i, k):
@@ -71,7 +68,7 @@ def k_fold_cross_validation(model, train_set, train_label, n_folds, den_label=No
 
         # train the model
         (tr_metric, tr_loss), (vl_metric, vl_loss) = model_k.fit(training_set, training_label, validation_set, validation_label)
-        print("Finished for k = {}".format(k))
+        logging.debug("Finished for k = {}".format(k))
         if vl_loss[-1] < best_vl_err:
             tr_err_with_best_vl_error = tr_loss
 
