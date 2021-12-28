@@ -114,7 +114,8 @@ def grid_search_cv(params, train_set, train_label, num_features, n_threads=4, sa
     # Sort results according to the accuracy of the models
     # if classification => accuracy => higher is better
     # if regression => error => lower is better
-    list(results).sort(key=lambda x: x['average_metric_vl'],
+    results = list(results)
+    results.sort(key=lambda x: x['average_metric_vl'],
                        reverse=True if isinstance(model.metric, metrics.ClassificationMetric)
                        else False)
 
