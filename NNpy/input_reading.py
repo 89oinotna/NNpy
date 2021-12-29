@@ -30,22 +30,26 @@ def read_cup(training=True, test=False, frac_train=1):
     if training and not test:
         cup_tr_dataset = pd.read_csv(training_path, sep=",", names=columns_tr_names, skiprows=7)
         cup_tr_dataset = cup_tr_dataset.sample(frac=1)
+        cup_tr_dataset.pop('id')
         n_rows = cup_tr_dataset.shape[0]
         train_data = cup_tr_dataset.head(round(n_rows*frac_train))
         test_data = cup_tr_dataset.tail(n_rows-train_data.shape[0])
-        train_labels = pd.DataFrame([train_data.pop(x) for x in ['label_x', 'label_y']])
-        test_labels = pd.DataFrame([test_data.pop(x) for x in ['label_x', 'label_y']])
-        return train_data, train_labels, test_data, test_labels
+        train_labels = pd.DataFrame([train_data.pop(x) for x in ['label_x', 'label_y']]).transpose()
+        test_labels = pd.DataFrame([test_data.pop(x) for x in ['label_x', 'label_y']]).transpose()
+        return train_data, train_labels.values, test_data, test_labels.values
     if test and not training:
         cup_ts_dataset = pd.read_csv(test_path, sep=",", names=columns_ts_names, skiprows=7)
         cup_ts_dataset = cup_ts_dataset.sample(frac=1)
+        cup_ts_dataset.pop('id')
         return cup_ts_dataset
     if training and test:
         cup_tr_dataset = pd.read_csv(training_path, sep=",", names=columns_tr_names, skiprows=7)
         cup_tr_dataset = cup_tr_dataset.sample(frac=1)
+        cup_tr_dataset.pop('id')
         labels = pd.DataFrame([cup_tr_dataset.pop(x) for x in ['label_x', 'label_y']])
         cup_ts_dataset = pd.read_csv(test_path, sep=",", names=columns_ts_names, skiprows=7)
-        return cup_tr_dataset, labels, cup_ts_dataset
+        cup_ts_dataset.pop('id')
+        return cup_tr_dataset, labels.values, cup_ts_dataset
     else:
         return
 

@@ -48,6 +48,7 @@ class Layer:
         :return: δ w to back propagate to previous layer
         """
         self.back=back
+
         self.delta = back * self.act_fun.derivative(self.net)
 
         # send to prev layer
