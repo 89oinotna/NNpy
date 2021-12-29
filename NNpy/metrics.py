@@ -3,7 +3,7 @@ import numpy as np
 
 def metric(type_init, **kwargs):
     init = {
-        'mee': MEE,
+        'mee': lambda **kwargs: MEE(),
         'simple_class':lambda **kwargs: SimpleClassification()
     }
     matrix = init[type_init](**kwargs)

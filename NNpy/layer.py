@@ -18,8 +18,11 @@ class Layer:
 
     """
 
-    def __init__(self, num_unit: int, num_input, act_fun: ActivationFunction, w_init:str):
+    def __init__(self, num_unit: int, num_input, act_fun: ActivationFunction, w_init:str, minibatch: bool = False):
         self.delta_w = np.zeros((num_unit, num_input+1)) # + bias
+        self.old_delta_w = np.zeros((num_unit, num_input+1)) # + bias
+        if minibatch:
+            self.list_old_delta_w = [self.old_delta_w]
         self.w = winit.weights_init(w_init, num_unit=num_unit, num_input=num_input)
         self.act_fun = act_fun
 
@@ -45,6 +48,7 @@ class Layer:
         :return: δ w to back propagate to previous layer
         """
         self.back=back
+
         self.delta = back * self.act_fun.derivative(self.net)
 
         # send to prev layer

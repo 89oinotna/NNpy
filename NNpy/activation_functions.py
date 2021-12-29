@@ -54,8 +54,6 @@ class Identity(ActivationFunction):
         :param x: list to compute
         :return: a list x that it's composed by all 1s.
         """
-        #der = [1.] * len(x)
-        # return der
         return 1
 
 
@@ -69,7 +67,6 @@ class Relu(ActivationFunction):
         :param x:
         :return:
         """
-        # return [np.maximum(0, i) for i in x]
         return np.maximum(x, 0)
 
     def derivative(self, x):
@@ -80,7 +77,6 @@ class Relu(ActivationFunction):
         :param x:
         :return:
         """
-        # return [0 if i <= 0 else 1 for i in x]
         return np.greater(x, 0)
 
 
@@ -104,9 +100,7 @@ class LeakyRelu(ActivationFunction):
         :param x:
         :return:
         """
-        # todo use np array
         return np.where(x >= 0, 1, 0.01)
-        #return [0.01 if i <= 0 else 1 for i in x]
 
 
 class Elu(ActivationFunction):
@@ -126,8 +120,6 @@ class Elu(ActivationFunction):
         :param x:
         :return:
         """
-
-        #return [i if i > 0 else np.multiply(self.alpha, np.subtract(np.exp(i), 1)) for i in x]
         return np.where(x > 0, x, self.alpha * (np.exp(x) - 1.))
 
     def derivative(self, x):
@@ -139,17 +131,6 @@ class Elu(ActivationFunction):
         :param x:
         :return:
         """
-        # todo use np array
-        """elu_values = self.output(x)
-        j = 0
-        res = []
-        for i in x:
-            if i > 0:
-                res.append(1)
-            else:
-                res.append(np.add(elu_valuejs[j], self.alpha))
-            j += 1
-        return resj"""
         return np.where(x >= 0, 1, self.output(x) + self.alpha)
 
 
@@ -163,9 +144,6 @@ class Sigmoid(ActivationFunction):
         :param x:
         :return:
         """
-        # num = [1.] * len(x)
-        # den = [np.add(1, np.exp(-i)) for i in x]
-        # return np.divide(num, den)
         return 1 / (1 + np.exp(-x))
 
     def derivative(self, x):
@@ -177,7 +155,6 @@ class Sigmoid(ActivationFunction):
         :return:
         """
         fx = self.output(x)
-        # return np.multiply(fx, (np.subtract(1, fx)))
         return fx * (1 - fx)
 
 

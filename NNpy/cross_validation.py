@@ -1,11 +1,11 @@
 import numpy as np
 import math
+
+from NNpy.network import NeuralNetwork
 from normalization import denormalize
 import metrics
-#import network
-#import layer
-#import weights_init as winit
-#import activation_functions as act_fun
+import copy
+import logging
 
 
 def fold_i_of_k(dataset, i, k):
@@ -31,7 +31,22 @@ def split(dataset, num_subsets):
             i + 1) * num_elements_per_set) for i in range(0, num_subsets)]
 
 
-def k_fold_cross_validation(model, training_set, n_folds, den_label=None):
+def init_model(nn_params):
+    """
+        Create NN model to use to execute a cross validation on it
+
+        Param:
+            nn_params(dict): dictionary of params to use to create NN object
+            num_features(int): number of features
+            output_dim(int): dimension of the output
+
+        Return a NN model with also complete graph topology of the network
+    """
+    model = NeuralNetwork.init(**nn_params)
+    return model
+
+
+def k_fold_cross_validation(model, train_set, train_label, n_folds, den_label=None):
     """cross validation implementation
 
     Args:
@@ -58,21 +73,22 @@ def k_fold_cross_validation(model, training_set, n_folds, den_label=None):
     results = []
 
     # get the indexes to break down the data set into the different folds
-    splitted_dataset_indices = split(training_set, n_folds)
+    splitted_dataset_indices = split(train_set, n_folds)
     for k in range(0, n_folds):
-        # create a deep copy of the model passed as argument
-        model_k = model.deepcopy()
+        """# create a deep copy of the model passed as argument
+        model_k = copy.deepcopy(model)"""
+        model_k = init_model(model)
         # dividing training and validation set
-        training_set = training_set[:splitted_dataset_indices[k]
-        [0]] + training_set[splitted_dataset_indices[k][1]:]
-        validation_set = training_set[splitted_dataset_indices[k]
-                                 [0]:splitted_dataset_indices[k][1]]
+        training_set = np.delete(train_set, np.r_[splitted_dataset_indices[k][0]:splitted_dataset_indices[k][1]], axis=0)
+        validation_set = train_set[np.r_[splitted_dataset_indices[k][0]:splitted_dataset_indices[k][1]]]
+        training_label = np.delete(train_label, np.r_[splitted_dataset_indices[k][0]:splitted_dataset_indices[k][1]], axis=0)
+        validation_label = train_label[np.r_[splitted_dataset_indices[k][0]:splitted_dataset_indices[k][1]]]
 
         # train the model
-        (tr_metric, tr_loss), (vl_metric, vl_loss) = model_k.fit(training_set, validation_set)
-        print("Finished for k = {}".format(k))
-        if vl_loss < best_vl_err:
-            tr_err_with_best_vl_error = tr_loss
+        (tr_metric, tr_loss), (vl_metric, vl_loss) = model_k.fit(training_set, training_label, validation_set, validation_label)
+        logging.debug("Finished for k = {}".format(k))
+        if vl_loss[-1] < best_vl_err:
+            tr_err_with_best_vl_error = tr_loss[-1]
 
         # update things for the cross validation result
 
@@ -98,9 +114,9 @@ def k_fold_cross_validation(model, training_set, n_folds, den_label=None):
                 label=denormalize(targets_validation, den_label)
             )
         else:
-            error = vl_metric
+            error = vl_metric[-1]
 
-        errors[n_folds] = error
+        errors[k] = error
 
         results.append([(tr_metric, tr_loss), (vl_metric, vl_loss)])
 
