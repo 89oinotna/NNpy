@@ -5,7 +5,7 @@ import pandas as pd
 import activation_functions as af
 import losses
 import metrics
-from input_reading import read_monk
+from input_reading import read_monk, read_cup
 import visualization as vis
 import grid_search as gs
 import itertools
@@ -29,12 +29,12 @@ wreg ={'type_init': 'tikonov', 'LAMBDA': 0.001}
 
 
 params = {
-    'layer_sizes': [(5, 1), (8, 1)],
-    'act_hidden': ["relu"],
-    'act_out': ["sigmoid"],
-    'w_init': ["monk"],
+    'layer_sizes': [(10, 70, 30, 2), (10, 100, 50, 10, 2)],
+    'act_hidden': ['sigmoid'],
+    'act_out': ["id"],
+    'w_init': ["xavier"],
     'loss': ["mse"],
-    'metric': ["simple_class"],
+    'metric': ["mee"],
 
     'optimizer': {
         'type_init': ['sgd'],
@@ -50,32 +50,33 @@ params = {
     'epochs': [500]
 }
 
-minibatch = {'layer_sizes': (8, 1),
-             'act_hidden': 'relu',
-             'act_out': 'sigmoid',
+minibatch = {'layer_sizes': (8, 2),
+             'act_hidden': 'sigmoid',
+             'act_out': 'id',
              'w_init': 'monk',
              'loss': 'mse',
-             'metric': 'simple_class',
-             'optimizer': {'type_init': 'sgd', 'ETA': 0.7, 'ALPHA': 0.8,
+             'metric': 'mee',
+             'optimizer': {'type_init': 'sgd', 'ETA': 0.2, 'ALPHA': 0.8,
                            'weight_regularizer': {'type_init': 'tikonov',
-                                                  'LAMBDA': 0.001
+                                                  'LAMBDA': 0.1
                                                   },
                            },
-             'batch_size': 32, 'epochs': 500, 'input_size': 17}
+             'batch_size': 32, 'epochs': 500, 'input_size': 10}
 
-train_data, train_label = read_monk("monks-1.train")
+train_data, train_labels=  read_monk("monks-1.train")
 test_data, test_label = read_monk("monks-1.test")
 
 # train the best model
-train_data, valid_data, train_labels, valid_labels = train_test_split(
-    train_data, train_label, test_size=0.2)
+#train_data, valid_data, train_labels, valid_labels = train_test_split(
+#    train_data, train_label, test_size=0.2)
 
 if __name__ == '__main__':
-    #gs.grid_search_cv(params, train_data, train_label)
-    network = nn.NeuralNetwork.init(**minibatch)
+    train_data, train_labels, valid_data, valid_labels = read_cup(frac_train=0.8)  # read_monk("monks-1.train")
+    minibatch = gs.grid_search_cv(params, train_data.values, train_labels)[0]
+    #network = nn.NeuralNetwork.init(**minibatch)
 
-    (tr_metric, tr_loss), (vl_metric, vl_loss) = network.fit(train_data, train_labels, valid_data, valid_labels)
-    vis.plot(tr_loss, vl_loss, tr_metric, vl_metric)
+    #(tr_metric, tr_loss), (vl_metric, vl_loss) = network.fit(train_data, train_labels, valid_data, valid_labels)
+    #vis.plot(tr_loss, vl_loss, tr_metric, vl_metric)
 
 """
 network = nn.NeuralNetwork.init([4, 1], 17, act_hidden='relu', act_out='sigmoid', w_init='monk', loss='mse',
