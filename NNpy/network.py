@@ -63,7 +63,7 @@ class NeuralNetwork:
 
     @staticmethod
     def init(layer_sizes: list, input_size: int, act_hidden: str, act_out: str,
-             w_init: str, loss: str, metric: str, optimizer: dict, weight_regularizer: dict = None, epochs=None,
+             w_init: str, loss: str, metric: str, optimizer: dict, epochs=None,
              minibatch_size: int = None, **kwargs):
         """
         Initializes a fully connected feed forward neural network implementation
@@ -89,7 +89,6 @@ class NeuralNetwork:
         act_out = af.activation_function(act_out, **kwargs)
         loss = losses.loss(loss, **kwargs)
         metric = metrics.metric(metric, **kwargs)
-        optimizer['weight_regularizer'] = weight_regularizer
         optimizer = opt.optimizer(**optimizer)
         return NeuralNetwork(layer_sizes, input_size, act_hidden, act_out, w_init, loss, metric, optimizer, epochs,
                              minibatch_size)

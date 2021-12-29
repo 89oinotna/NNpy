@@ -3,11 +3,13 @@ from random import randint
 from network import NeuralNetwork
 
 
-class Bagging():
+class Bagging:
 
-    def __init__(self, sample_size, max_epochs_tr=1500, bootstrap=True):
+    def __init__(self, sample_size, max_epochs_tr=1500, bootstrap=True, models=None):
+        if models is None:
+            models = []
         self.sample_size = sample_size
-        self.models = []
+        self.models = models
         self.bootstrap = bootstrap
         self.max_epochs_tr = max_epochs_tr
 

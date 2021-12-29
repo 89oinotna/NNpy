@@ -35,21 +35,33 @@ params = {
     'w_init': ["monk"],
     'loss': ["mse"],
     'metric': ["simple_class"],
-    'weight_regularizer': {'type_init':['tikonov'],
-                              'LAMBDA':[0.1, 0.01, 0.001, 0.0001, 0.00001]
-                              },
+
     'optimizer': {
         'type_init': ['sgd'],
         #'nesterov':[True],
         'ETA':[0.001, 0.01, 0.1, 0.2, 0.3, 0.5, 0.6, 0.7, 0.8],
         #'momentum_window': 1,
-        'ALPHA': [0.0, 0.2, 0.4, 0.6, 0.7, 0.8, 0.9]
+        'ALPHA': [0.0, 0.2, 0.4, 0.6, 0.7, 0.8, 0.9],
+        'weight_regularizer': {'type_init':['tikonov'],
+                              'LAMBDA':[0.1, 0.01, 0.001, 0.0001, 0.00001]
+                              },
     },
     'batch_size': [32, 64],
     'epochs': [500]
 }
 
-minibatch = {'layer_sizes': (8, 1), 'act_hidden': 'relu', 'act_out': 'sigmoid', 'w_init': 'monk', 'loss': 'mse', 'metric': 'simple_class', 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.001}, 'optimizer': {'type_init': 'sgd', 'ETA': 0.7, 'ALPHA': 0.8, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.001}}, 'batch_size': 32, 'epochs': 500, 'input_size': 17}
+minibatch = {'layer_sizes': (8, 1),
+             'act_hidden': 'relu',
+             'act_out': 'sigmoid',
+             'w_init': 'monk',
+             'loss': 'mse',
+             'metric': 'simple_class',
+             'optimizer': {'type_init': 'sgd', 'ETA': 0.7, 'ALPHA': 0.8,
+                           'weight_regularizer': {'type_init': 'tikonov',
+                                                  'LAMBDA': 0.001
+                                                  },
+                           },
+             'batch_size': 32, 'epochs': 500, 'input_size': 17}
 
 train_data, train_label = read_monk("monks-1.train")
 test_data, test_label = read_monk("monks-1.test")
