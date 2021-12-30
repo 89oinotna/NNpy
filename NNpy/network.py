@@ -87,8 +87,8 @@ class NeuralNetwork:
         """
         act_hidden = af.activation_function(act_hidden, **kwargs)
         act_out = af.activation_function(act_out, **kwargs)
-        loss = losses.loss(loss)
-        metric = metrics.metric(metric)
+        loss = losses.loss(loss, **kwargs)
+        metric = metrics.metric(metric, **kwargs)
         optimizer = opt.optimizer(**optimizer)
         return NeuralNetwork(layer_sizes, input_size, act_hidden, act_out, w_init, loss, metric, optimizer, epochs,
                              minibatch_size)

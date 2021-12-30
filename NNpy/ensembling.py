@@ -14,7 +14,7 @@ class Bagging:
         self.max_epochs_tr = max_epochs_tr
 
     def _generate_sample(self, data, labels):
-        """perform bootstrap with resampling
+        """performs bootstrap with resampling
 
         Args:
             data (list): data over which perform the bootstrap
@@ -40,7 +40,7 @@ class Bagging:
         self.models.append(model)
 
     def fit(self, tr_data, tr_label, validation_set=None, test_set=None):
-        """perform training 
+        """performs training of the models
 
         Args:
             tr_data (np.array): data used for training
@@ -83,4 +83,4 @@ class Bagging:
 
             Return: the predicted target over the sample
         """
-        return np.mean([model.predict(sample) for model in self.models], axis=0)
+        return np.mean([model.feed_forward(sample) for model in self.models], axis=0)

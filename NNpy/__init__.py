@@ -29,8 +29,8 @@ wreg ={'type_init': 'tikonov', 'LAMBDA': 0.001}
 
 
 params = {
-    'layer_sizes': [(10, 70, 30, 2), (10, 100, 50, 10, 2)],
-    'act_hidden': ['sigmoid'],
+    'layer_sizes': [(30, 30,  2), (70, 70, 2), (180, 2)],
+    'act_hidden': ['sigmoid', 'relu'],
     'act_out': ["id"],
     'w_init': ["xavier"],
     'loss': ["mse"],
@@ -46,7 +46,7 @@ params = {
                               'LAMBDA':[0.1, 0.01, 0.001, 0.0001, 0.00001]
                               },
     },
-    'batch_size': [32, 64],
+    'batch_size': [16, 32, 64],
     'epochs': [500]
 }
 

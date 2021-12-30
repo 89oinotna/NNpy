@@ -152,7 +152,6 @@ def write_results(results, file_path):
                 str(item['average_tr_error_best_vl']),
                 str(item['nn_params'])
             ])
-        print(f'Saved results in {file_path}')
 
 
 """"""

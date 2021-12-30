@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 import os
 import numpy as np
 
@@ -34,6 +34,10 @@ def read_cup(frac_train=0.8):
     test_data = cup_tr_dataset.tail(n_rows - train_data.shape[0])
     train_labels = pd.DataFrame([train_data.pop(x) for x in ['label_x', 'label_y']]).transpose()
     test_labels = pd.DataFrame([test_data.pop(x) for x in ['label_x', 'label_y']]).transpose()
+    x = train_data.values  # returns a numpy array
+    min_max_scaler = MinMaxScaler()
+    data_scaled = min_max_scaler.fit_transform(x)
+    train_data = pd.DataFrame(data_scaled)
     return train_data, train_labels.values, test_data, test_labels.values
 
 

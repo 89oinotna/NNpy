@@ -1,12 +1,12 @@
 import numpy as np
 
 
-def metric(type_init):
+def metric(type_init, **kwargs):
     init = {
-        'mee': MEE,
-        'simple_class': SimpleClassification
+        'mee': lambda **kwargs: MEE(),
+        'simple_class':lambda **kwargs: SimpleClassification()
     }
-    matrix = init[type_init]()
+    matrix = init[type_init](**kwargs)
     return matrix
 
 
