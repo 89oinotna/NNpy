@@ -1,11 +1,11 @@
 import numpy as np
 
 
-def loss(type_init, **kwargs):
+def loss(type_init):
     init = {
-        'mse': lambda **kwargs: MeanSquaredError()
+        'mse': MeanSquaredError
     }
-    matrix = init[type_init](**kwargs)
+    matrix = init[type_init]()
     return matrix
 
 
