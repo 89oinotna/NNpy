@@ -5,7 +5,7 @@ import pandas as pd
 import activation_functions as af
 import losses
 import metrics
-from input_reading import read_monk, read_cup
+from input_reading import read_cup
 import visualization as vis
 import grid_search as gs
 import itertools
@@ -13,11 +13,12 @@ import logging
 from sklearn.model_selection import train_test_split
 
 #logging.basicConfig(level=logging.DEBUG)
-
+"""
 monk_data, monk_label = read_monk('monks-1.test')
 monk_data_tr, monk_data_vl = np.array_split(monk_data,2)
 monk_label_tr, monk_label_vl = np.array_split(monk_label,2)
 #print(monk_data[:1000, :])
+"""
 optimizer = {
     'type_init': 'sgd',
     'nesterov':True,
@@ -29,10 +30,10 @@ wreg ={'type_init': 'tikonov', 'LAMBDA': 0.001}
 
 
 params = {
-    'layer_sizes': [(30, 30,  2), (70, 70, 2), (180, 2)],
-    'act_hidden': ['sigmoid', 'relu'],
+    'layer_sizes': [(38, 40,  2)],
+    'act_hidden': ['relu'],
     'act_out': ["id"],
-    'w_init': ["xavier"],
+    'w_init': ["he"],
     'loss': ["mse"],
     'metric': ["mee"],
 
@@ -63,8 +64,8 @@ minibatch = {'layer_sizes': (8, 2),
                            },
              'batch_size': 32, 'epochs': 500, 'input_size': 10}
 
-train_data, train_labels=  read_monk("monks-1.train")
-test_data, test_label = read_monk("monks-1.test")
+#train_data, train_labels=  read_monk("monks-1.train")
+#test_data, test_label = read_monk("monks-1.test")
 
 # train the best model
 #train_data, valid_data, train_labels, valid_labels = train_test_split(
