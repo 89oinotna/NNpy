@@ -135,15 +135,14 @@ def write_results(results, file_path):
 
     with open(file_path, 'w') as result_file:
         writer = csv.writer(result_file)
-        writer.writerow(['average_accuracy_vl', 'sd_accuracy_vl', 'average_tr_error_best_vl',
-                         'network_topology', 'activation_hidden', 'weight_init', 'regularization',
-                         'momentum', 'learning_rate'])
+        writer.writerow(['average_accuracy_vl', 'sd_accuracy_vl', 'average_metric_tr',
+                         'network_topology'])
 
         for item in results:
             writer.writerow([
                 str(item['average_metric_vl']),
                 str(item['sd_metric_vl']),
-                str(item['average_tr_error_best_vl']),
+                str(item['average_metric_tr']),
                 str(item['nn_params'])
             ])
         print(f'Saved results in {file_path}')
