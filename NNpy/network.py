@@ -1,3 +1,5 @@
+import logging
+
 import numpy as np
 import pandas as pd
 from layer import Layer
@@ -194,7 +196,7 @@ class NeuralNetwork:
                 if early_stopping:
                     if abs(best_cost - monitoring[i]) < min_delta:
                         last_improvement += 1
-                        print("Not improving model (loss) ", last_improvement)
+                        logging.debug("Not improving model (loss) ", last_improvement)
                         if last_improvement == patience:
                             print("No improvement found during the ", last_improvement,
                                   " last iterations, so we stopped!")
@@ -208,7 +210,7 @@ class NeuralNetwork:
                         best_model["layers"] = self.layers
                         best_model["loss"] = self.loss
                         best_model["optimizer"] = self.optimizer
-                        print("The epoch ", i, " improved the model ", monitor)
+                        logging.debug("The epoch ", i, " improved the model ", monitor)
 
         if vl_data is not None:
             return (tr_metric, tr_loss), (vl_metric, vl_loss)
