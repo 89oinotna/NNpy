@@ -46,10 +46,11 @@ def init_model(nn_params):
     return model
 
 
-def k_fold_cross_validation(model, train_set, train_label, n_folds, den_label=None):
+def k_fold_cross_validation(model, train_set, train_label, n_folds, fit_params=None):
     """cross validation implementation
 
     Args:
+        fit_params: parameters for the fit method of the model
         model (NeuralNetwork): neural network from each fold iteration start
         training_set (array of tuple): data for training
         n_folds (int): number of folds
@@ -65,7 +66,6 @@ def k_fold_cross_validation(model, train_set, train_label, n_folds, den_label=No
             * list of all the results
     """
     # output of the cross validation
-    tr_err_with_best_vl_error = np.inf
     metric_res = {'tr': np.zeros(n_folds),
                   'vl': np.zeros(n_folds)}
     results = []
@@ -77,13 +77,20 @@ def k_fold_cross_validation(model, train_set, train_label, n_folds, den_label=No
         model_k = copy.deepcopy(model)"""
         model_k = init_model(model)
         # dividing training and validation set
-        training_set = np.delete(train_set, np.r_[splitted_dataset_indices[k][0]:splitted_dataset_indices[k][1]], axis=0)
+        training_set = np.delete(train_set, np.r_[splitted_dataset_indices[k][0]:splitted_dataset_indices[k][1]],
+                                 axis=0)
         validation_set = train_set[np.r_[splitted_dataset_indices[k][0]:splitted_dataset_indices[k][1]]]
-        training_label = np.delete(train_label, np.r_[splitted_dataset_indices[k][0]:splitted_dataset_indices[k][1]], axis=0)
+        training_label = np.delete(train_label, np.r_[splitted_dataset_indices[k][0]:splitted_dataset_indices[k][1]],
+                                   axis=0)
         validation_label = train_label[np.r_[splitted_dataset_indices[k][0]:splitted_dataset_indices[k][1]]]
 
         # train the model
-        (tr_metric, tr_loss), (vl_metric, vl_loss) = model_k.fit(training_set, training_label, validation_set, validation_label)
+        if fit_params is None:
+            (tr_metric, tr_loss), (vl_metric, vl_loss) = model_k.fit(training_set, training_label, validation_set,
+                                                                     validation_label)
+        else:
+            (tr_metric, tr_loss), (vl_metric, vl_loss) = model_k.fit(training_set, training_label, validation_set,
+                                                                     validation_label, **fit_params)
         logging.debug("Finished for k = {}".format(k))
 
         metric_res['vl'][k] = vl_metric[-1]
@@ -91,7 +98,7 @@ def k_fold_cross_validation(model, train_set, train_label, n_folds, den_label=No
 
         results.append([(tr_metric, tr_loss), (vl_metric, vl_loss)])
 
-        #TODO accuracy plot:
+        # TODO accuracy plot:
 
     return np.round(np.mean(metric_res['vl']), 10), np.round(np.std(metric_res['vl']), 10), \
            np.round(np.mean(metric_res['tr']), 10), results
