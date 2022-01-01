@@ -65,11 +65,9 @@ def k_fold_cross_validation(model, train_set, train_label, n_folds, den_label=No
             * list of all the results
     """
     # output of the cross validation
-    MEE = metrics.MEE
-    sum_tr_errors = 0
-    best_vl_err = np.inf
     tr_err_with_best_vl_error = np.inf
-    errors = np.zeros(n_folds)
+    metric_res = {'tr': np.zeros(n_folds),
+                  'vl': np.zeros(n_folds)}
     results = []
 
     # get the indexes to break down the data set into the different folds
@@ -87,40 +85,13 @@ def k_fold_cross_validation(model, train_set, train_label, n_folds, den_label=No
         # train the model
         (tr_metric, tr_loss), (vl_metric, vl_loss) = model_k.fit(training_set, training_label, validation_set, validation_label)
         logging.debug("Finished for k = {}".format(k))
-        if vl_loss[-1] < best_vl_err:
-            tr_err_with_best_vl_error = tr_loss[-1]
 
-        # update things for the cross validation result
-
-        # sum the training error that we have when we reach the minimum validation error
-
-        sum_tr_errors += tr_err_with_best_vl_error
-
-        inputs_validation = np.array([elem[0]
-                                      for elem in validation_set])
-        targets_validation = np.array([elem[1]
-                                       for elem in validation_set])
-
-        # add the error to the vector errors to compute the standard deviation and the mean accuracy
-        error = 0
-
-        # if den_label, then the result predicted by the hypothesis is denormalized
-        # as for the targets in the validation set
-        if den_label:
-            predicted_test_data = denormalize(
-                model_k.predict(inputs_validation), den_label)
-            error = MEE.error(
-                output=predicted_test_data,
-                label=denormalize(targets_validation, den_label)
-            )
-        else:
-            error = vl_metric[-1]
-
-        errors[k] = error
+        metric_res['vl'][k] = vl_metric[-1]
+        metric_res['tr'][k] = tr_metric[-1]
 
         results.append([(tr_metric, tr_loss), (vl_metric, vl_loss)])
 
         #TODO accuracy plot:
 
-    return np.round(np.mean(errors), 10), np.round(np.std(errors), 10), np.round(
-        sum_tr_errors / n_folds, 10), results
+    return np.round(np.mean(metric_res['vl']), 10), np.round(np.std(metric_res['vl']), 10), \
+           np.round(np.mean(metric_res['tr']), 10), results

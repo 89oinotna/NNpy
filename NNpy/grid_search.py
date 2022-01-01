@@ -31,7 +31,7 @@ def run(index, results, nn_params, train_set, train_label):
     res = {
         'average_metric_vl': average_vl,
         'sd_metric_vl': sd_vl,
-        'average_tr_error_best_vl': average_tr_error_best_vl,
+        'average_metric_tr': average_tr_error_best_vl,
         'nn_params': nn_params,
     }
     print(f"Finished {index}, results are:\n\t{res}")
