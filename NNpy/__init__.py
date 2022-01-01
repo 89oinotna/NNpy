@@ -13,10 +13,10 @@ import logging
 from sklearn.model_selection import train_test_split
 
 #logging.basicConfig(level=logging.DEBUG)
-monk_data, monk_label = read_monk('monks-1.test')
-monk_data_tr, monk_data_vl = np.array_split(monk_data,2)
-monk_label_tr, monk_label_vl = np.array_split(monk_label,2)
-#print(monk_data[:1000, :])
+monk_data_tr, monk_tr_label, monk_vl_data, monk_vl_label, monk_test_data, monk_test_label= read_monk('monks-1')
+#train_data, valid_data, train_labels, valid_labels = train_test_split(
+#    train_data, train_label, test_size=0.2)
+
 optimizer = {
     'type_init': 'sgd',
     'nesterov':True,
@@ -80,8 +80,6 @@ cup = {'layer_sizes': (10, 70, 30, 2),
        'epochs': 500,
        'input_size': 10}
 
-train_data, train_labels=  read_monk("monks-1.train")
-test_data, test_label = read_monk("monks-1.test")
 
 # train the best model
 #train_data, valid_data, train_labels, valid_labels = train_test_split(
