@@ -14,7 +14,7 @@ import logging
 # Params used to do our GridSearch on our NN model (# of combinations = Cartesian product between params_grid entries)
 
 
-def run(index, model, results, nn_params, train_set, train_label):
+def run(index, results, nn_params, train_set, train_label):
     """
         Proxy function where it will start the k_fold cross validation on a configuration
         in an asynchronous way
@@ -101,9 +101,8 @@ def grid_search_cv(params, train_set, train_label,  n_threads=4, save_path='./',
     print(f"Starting Grid Search: {len(combinations)} * 5 (CV) to try")
     for i, nn_params in enumerate(combinations):
         nn_params['input_size'] = input_size
-        model = init_model(nn_params)
         tasks.append(pool.apply_async(func=run,
-                                      args=(i, model, results, nn_params, train_set, train_label),
+                                      args=(i, results, nn_params, train_set, train_label),
                                       ))
 
     for task in tasks:
@@ -116,7 +115,7 @@ def grid_search_cv(params, train_set, train_label,  n_threads=4, save_path='./',
     # if regression => error => lower is better
     results = list(results)
     results.sort(key=lambda x: x['average_metric_vl'],
-                       reverse=True if isinstance(model.metric, metrics.ClassificationMetric)
+                       reverse=True if isinstance(metrics.metric(combinations[0]['metric']), metrics.ClassificationMetric)
                        else False)
 
     # Write to file results obtained
