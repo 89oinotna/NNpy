@@ -1,23 +1,18 @@
-import numpy as np
 import network as nn
-import pandas as pd
-# print(wi.xavier_init(2,2)[0:, 1:])
 import activation_functions as af
 import losses
 import metrics
-from input_reading import read_monk, read_cup
+from input_reading import read_cup
 import visualization as vis
 import grid_search as gs
-import itertools
-import logging
-from sklearn.model_selection import train_test_split
 
 #logging.basicConfig(level=logging.DEBUG)
-
+"""
 monk_data, monk_label = read_monk('monks-1.test')
 monk_data_tr, monk_data_vl = np.array_split(monk_data,2)
 monk_label_tr, monk_label_vl = np.array_split(monk_label,2)
 #print(monk_data[:1000, :])
+"""
 optimizer = {
     'type_init': 'sgd',
     'nesterov':True,
@@ -29,7 +24,7 @@ wreg ={'type_init': 'tikonov', 'LAMBDA': 0.001}
 
 
 params = {
-    'layer_sizes': [(10, 70, 30, 2), (10, 100, 50, 10, 2)],
+    'layer_sizes': [(35, 35, 2), (37, 37, 2), (41, 41, 2)],
     'act_hidden': ['sigmoid'],
     'act_out': ["id"],
     'w_init': ["xavier"],
@@ -39,15 +34,15 @@ params = {
     'optimizer': {
         'type_init': ['sgd'],
         #'nesterov':[True],
-        'ETA':[0.001, 0.01, 0.1, 0.2, 0.3, 0.5, 0.6, 0.7, 0.8],
+        'ETA':[0.1, 0.06, 0.07, 0.08],
         #'momentum_window': 1,
         'ALPHA': [0.0, 0.2, 0.4, 0.6, 0.7, 0.8, 0.9],
         'weight_regularizer': {'type_init':['tikonov'],
-                              'LAMBDA':[0.1, 0.01, 0.001, 0.0001, 0.00001]
+                              'LAMBDA':[0.001, 0.0001, 0.00001]
                               },
     },
-    'batch_size': [32, 64],
-    'epochs': [500]
+    'batch_size': [16, 32, 64],
+    'epochs': [500, 1000]
 }
 
 minibatch = {'layer_sizes': (8, 2),
@@ -63,8 +58,8 @@ minibatch = {'layer_sizes': (8, 2),
                            },
              'batch_size': 32, 'epochs': 500, 'input_size': 10}
 
-train_data, train_labels=  read_monk("monks-1.train")
-test_data, test_label = read_monk("monks-1.test")
+#train_data, train_labels=  read_monk("monks-1.train")
+#test_data, test_label = read_monk("monks-1.test")
 
 # train the best model
 #train_data, valid_data, train_labels, valid_labels = train_test_split(
