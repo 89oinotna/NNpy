@@ -31,7 +31,7 @@ class SGD(Optimizer):
 
     """
 
-    def __init__(self, ETA=0.01, weight_regularizer: reg.WeightRegularizer = None, ALPHA: float = 0.5,
+    def __init__(self, ETA=0.01, weight_regularizer: reg.WeightRegularizer = None, ALPHA: float = 0.0,
                  nesterov: bool = False, momentum_window: int = None, variable_eta: dict = None):
         if variable_eta is not None:
             variable_eta['eta'] = ETA  # eta 0
