@@ -39,7 +39,7 @@ class Bagging:
         """
         self.models.append(model)
 
-    def fit(self, tr_data, tr_label, validation_set=None, test_set=None):
+    def fit(self, tr_data, tr_label, validation_data=None, validation_label=None, test_set=None):
         """performs training of the models
 
         Args:
@@ -51,23 +51,22 @@ class Bagging:
             Report: report that contains information about the training 
         """
         training_results = []
-
         # training
         for i in range(0, len(self.models)):
             # if bootstrap is true then perform _generate_sample(Bootstrap with resampling), otherwise we simply use
             # the original training set
-            results_model_i = self.models[i].fit(self._generate_sample(tr_data, tr_label), validation_set, test_set) \
-                if self.bootstrap else self.models[i].fit((tr_data, tr_label), validation_set, test_set)
+            results_model_i = self.models[i].fit(tr_data, tr_label, validation_data, validation_label, early_stopping=True) \
+                if self.bootstrap else self.models[i].fit(tr_data, tr_label, validation_data, validation_label, early_stopping=True)
 
             training_results.append(results_model_i)
 
         # calculate the mean of every result
-        final_training_error = np.mean([training_result[0][1] for training_result in training_results], axis=0)
-        final_validation_error = np.mean([training_result[1][1] for training_result in training_results], axis=0)
+        final_training_error = np.mean([training_result[0][1][-1] for training_result in training_results], axis=0)
+        final_validation_error = np.mean([training_result[1][1][-1] for training_result in training_results], axis=0)
         final_training_accuracy = np.mean(
-            [training_result[0][0] for training_result in training_results], axis=0)
+            [training_result[0][0][-1] for training_result in training_results], axis=0)
         final_validation_accuracy = np.mean(
-            [training_result[1][0] for training_result in training_results], axis=0)
+            [training_result[1][0][-1] for training_result in training_results], axis=0)
 
         #TODO: the same for test and print training accuracy
 
@@ -84,3 +83,4 @@ class Bagging:
             Return: the predicted target over the sample
         """
         return np.mean([model.feed_forward(sample) for model in self.models], axis=0)
+

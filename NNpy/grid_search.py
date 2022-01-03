@@ -5,16 +5,11 @@ import itertools
 import time
 import metrics
 from network import NeuralNetwork
-import losses
-from normalization import normalize, denormalize
-from ensembling import Bagging
-import logging
 
 
 # Params used to do our GridSearch on our NN model (# of combinations = Cartesian product between params_grid entries)
 
-
-def run(index, model, results, nn_params, train_set, train_label):
+def run(index, results, nn_params, train_set, train_label, fit_params=None):
     """
         Proxy function where it will start the k_fold cross validation on a configuration
         in an asynchronous way
@@ -26,17 +21,16 @@ def run(index, model, results, nn_params, train_set, train_label):
             Returns nothing but add result from cross validation and nn_params in results list
     """
     print(f"Starting model {index}: {nn_params}")
-    average_vl, sd_vl, average_tr_error_best_vl, res = cv.k_fold_cross_validation(
-        nn_params, train_set, train_label, 5)
+    avg_metric_vl, sd_vl, avg_metric_tr, res = cv.k_fold_cross_validation(
+        nn_params, train_set, train_label, 5, fit_params)
     res = {
-        'average_metric_vl': average_vl,
+        'average_metric_vl': avg_metric_vl,
         'sd_metric_vl': sd_vl,
-        'average_tr_error_best_vl': average_tr_error_best_vl,
+        'average_metric_tr': avg_metric_tr,
         'nn_params': nn_params,
     }
     print(f"Finished {index}, results are:\n\t{res}")
     results.append(res)
-    # print("Finish {} cross-validation".format(len(results)))
 
 
 def init_model(nn_params):
@@ -54,7 +48,7 @@ def init_model(nn_params):
     return model
 
 
-def grid_search_cv(params, train_set, train_label,  n_threads=4, save_path='./', name="grid"):
+def grid_search_cv(params, train_set, train_label, fit_params=None, n_threads=4, save_path='./', name="grid"):
     """
         Execute Grid Search
         Use multiprocessing library to do a parallel execution
@@ -65,6 +59,7 @@ def grid_search_cv(params, train_set, train_label,  n_threads=4, save_path='./',
 
     """
     input_size = train_set.shape[1]
+
     def flatten_list(l):
         lst = []
         for i, v in enumerate(l):
@@ -101,9 +96,8 @@ def grid_search_cv(params, train_set, train_label,  n_threads=4, save_path='./',
     print(f"Starting Grid Search: {len(combinations)} * 5 (CV) to try")
     for i, nn_params in enumerate(combinations):
         nn_params['input_size'] = input_size
-        model = init_model(nn_params)
         tasks.append(pool.apply_async(func=run,
-                                      args=(i, model, results, nn_params, train_set, train_label),
+                                      args=(i, results, nn_params, train_set, train_label, fit_params),
                                       ))
 
     for task in tasks:
@@ -116,8 +110,8 @@ def grid_search_cv(params, train_set, train_label,  n_threads=4, save_path='./',
     # if regression => error => lower is better
     results = list(results)
     results.sort(key=lambda x: x['average_metric_vl'],
-                       reverse=True if isinstance(model.metric, metrics.ClassificationMetric)
-                       else False)
+                 reverse=True if isinstance(metrics.metric(combinations[0]['metric']), metrics.ClassificationMetric)
+                 else False)
 
     # Write to file results obtained
     if name == 'grid':
@@ -141,15 +135,14 @@ def write_results(results, file_path):
 
     with open(file_path, 'w') as result_file:
         writer = csv.writer(result_file)
-        writer.writerow(['average_accuracy_vl', 'sd_accuracy_vl', 'average_tr_error_best_vl',
-                         'network_topology', 'activation_hidden', 'weight_init', 'regularization',
-                         'momentum', 'learning_rate'])
+        writer.writerow(['average_metric_vl', 'sd_metric_vl', 'average_metric_tr',
+                         'network_topology'])
 
         for item in results:
             writer.writerow([
                 str(item['average_metric_vl']),
                 str(item['sd_metric_vl']),
-                str(item['average_tr_error_best_vl']),
+                str(item['average_metric_tr']),
                 str(item['nn_params'])
             ])
         print(f'Saved results in {file_path}')

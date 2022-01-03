@@ -40,3 +40,9 @@ class SimpleClassification(ClassificationMetric):
     def accuracy(self, label: np.ndarray, output: np.ndarray):
         output = np.around(output)
         return np.sum(([1 if out == lab else 0 for lab, out in zip(label, output)])) / len(label)
+
+
+def report_score(label, output, metric=MEE()):
+
+    return metric(label, output)
+

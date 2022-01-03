@@ -1,3 +1,5 @@
+import logging
+
 import numpy as np
 import pandas as pd
 from layer import Layer
@@ -87,7 +89,7 @@ class NeuralNetwork:
         """
         act_hidden = af.activation_function(act_hidden, **kwargs)
         act_out = af.activation_function(act_out, **kwargs)
-        loss = losses.loss(loss, **kwargs)
+        loss = losses.loss(loss)
         metric = metrics.metric(metric, **kwargs)
         optimizer = opt.optimizer(**optimizer)
         return NeuralNetwork(layer_sizes, input_size, act_hidden, act_out, w_init, loss, metric, optimizer, epochs,
@@ -142,7 +144,7 @@ class NeuralNetwork:
         vl_metric = []
         monitoring = None
         tr = None
-
+        labels_size=tr_label.shape[1]
         if self.minibatch_size is not None:  # to redo the splitting
             tr = pd.DataFrame(np.concatenate((tr_data, tr_label), axis=1))
 
@@ -169,8 +171,8 @@ class NeuralNetwork:
             if self.minibatch_size is not None:
                 # shuffling
                 tr = tr.sample(frac=1)
-                tr_data = tr.iloc[:, :-1]
-                tr_label = tr.iloc[:, -1].to_frame()
+                tr_data = tr.iloc[:, :-labels_size]
+                tr_label = pd.DataFrame(tr.iloc[:, -labels_size:])
 
                 for j in range(int(np.ceil(tr.shape[0] / self.minibatch_size))):
                     # if last minibatch is smaller than minibatch_size
@@ -194,7 +196,7 @@ class NeuralNetwork:
                 if early_stopping:
                     if abs(best_cost - monitoring[i]) < min_delta:
                         last_improvement += 1
-                        print("Not improving model (loss) ", last_improvement)
+                        logging.debug("Not improving model (loss) ", last_improvement)
                         if last_improvement == patience:
                             print("No improvement found during the ", last_improvement,
                                   " last iterations, so we stopped!")
@@ -208,7 +210,7 @@ class NeuralNetwork:
                         best_model["layers"] = self.layers
                         best_model["loss"] = self.loss
                         best_model["optimizer"] = self.optimizer
-                        print("The epoch ", i, " improved the model ", monitor)
+                        logging.debug("The epoch ", i, " improved the model ", monitor)
 
         if vl_data is not None:
             return (tr_metric, tr_loss), (vl_metric, vl_loss)
