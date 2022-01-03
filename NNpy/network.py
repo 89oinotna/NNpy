@@ -144,7 +144,7 @@ class NeuralNetwork:
         vl_metric = []
         monitoring = None
         tr = None
-
+        labels_size=tr_label.shape[1]
         if self.minibatch_size is not None:  # to redo the splitting
             tr = pd.DataFrame(np.concatenate((tr_data, tr_label), axis=1))
 
@@ -171,8 +171,8 @@ class NeuralNetwork:
             if self.minibatch_size is not None:
                 # shuffling
                 tr = tr.sample(frac=1)
-                tr_data = tr.iloc[:, :-1]
-                tr_label = tr.iloc[:, -1].to_frame()
+                tr_data = tr.iloc[:, :-labels_size]
+                tr_label = pd.DataFrame(tr.iloc[:, -labels_size:])
 
                 for j in range(int(np.ceil(tr.shape[0] / self.minibatch_size))):
                     # if last minibatch is smaller than minibatch_size
