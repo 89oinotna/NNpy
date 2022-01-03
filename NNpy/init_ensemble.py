@@ -158,3 +158,4 @@ for i, model in enumerate(ensemble.models):
     (tr_metric, tr_loss), (vl_metric, vl_loss) = model.fit(train_data, train_labels, valid_data, valid_labels,
                                                            early_stopping=True)
     vis.plot(tr_loss, vl_loss, tr_metric, vl_metric, i)
+    model.save(name=i)
