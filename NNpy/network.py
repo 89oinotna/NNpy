@@ -8,6 +8,7 @@ import losses
 import metrics
 import optimizers as opt
 import regularization as reg
+import pickle
 
 '''
 regression: output linear units 
@@ -120,6 +121,10 @@ class NeuralNetwork:
         self.back_propagate(diff)
         return output
 
+    def evaluate(self, data, label):
+        output = self.feed_forward(data)
+        return (self.loss.error(label, output)), (self.metric(label, output))
+
     def fit(self, tr_data, tr_label, vl_data=None, vl_label=None, early_stopping=False, monitor="vl_loss",
             min_delta=0.001, patience=20, mode="min"):
         """
@@ -215,6 +220,16 @@ class NeuralNetwork:
         if vl_data is not None:
             return (tr_metric, tr_loss), (vl_metric, vl_loss)
         return tr_metric, tr_loss
+
+    def save(self, path='./', name=None):
+        if name is None:
+            name=str(hash(self))
+        pickle.dump(self, open(f'{path}{name}.pkl', 'wb'))
+
+
+    @staticmethod
+    def load(path='./', name=None):
+        return pickle.load(open(f'{path}{name}.pkl', 'rb'))
 
     """
 
