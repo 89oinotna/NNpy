@@ -107,15 +107,24 @@ cup = {'layer_sizes': (10, 70, 30, 2),
 #    train_data, train_label, test_size=0.2)
 
 if __name__ == '__main__':
-    #train_data, train_labels, test_data, test_labels = read_cup(frac_train=0.8)  # read_monk("monks-1.train")
+    train_data, train_labels, test_data, test_labels = read_cup(frac_train=0.8)  # read_monk("monks-1.train")
+    train_data, valid_data, train_labels, valid_labels = train_test_split(
+            train_data, train_labels, test_size=0.2)
+    #grid_results = gs.grid_search_cv(monk_params, monk_data_tr, monk_tr_label)
 
-    grid_results = gs.grid_search_cv(monk_params, monk_data_tr, monk_tr_label)
+    grid_results = pd.read_csv("datasets/gs_results/grid_antonio_2.csv", sep=",")
 
-    #grid_results = pd.read_csv("datasets/gs_results/grid_antonio_2.csv", sep=",")
+    network = nn.NeuralNetwork.init(**eval(grid_results.loc[0, 'network_topology']), minibatch_size=2)
+    print(grid_results.loc[0, 'network_topology'])
 
-    #network = nn.NeuralNetwork.init(**eval(grid_results.loc[0, 'network_topology']))
-    #(tr_metric, tr_loss), (vl_metric, vl_loss) = network.fit(train_data, train_labels, valid_data, valid_labels, early_stopping=True)
+    (tr_metric, tr_loss), (vl_metric, vl_loss) = network.fit(train_data, train_labels, valid_data, valid_labels, early_stopping=True)
     #vis.plot(tr_loss, vl_loss, tr_metric, vl_metric)
+    #network.save()
+
+
+    #network = nn.NeuralNetwork.load(name='144670304208')
+    #print(network.evaluate(valid_data, valid_labels))
+
 
     #grid_results = pd.read_csv("./grid_antonio_1.csv", sep=",")
     #print(grid_results.head())
