@@ -51,7 +51,6 @@ def read_test_cup():
     test_path = dir_path + "/datasets/cup/ML-CUP21-TS.csv"
 
     cup_ts_dataset = pd.read_csv(test_path, sep=",", names=columns_ts_names, skiprows=7)
-    cup_ts_dataset = cup_ts_dataset.sample(frac=1)
     id = cup_ts_dataset.pop('id')
     return id, cup_ts_dataset
 
