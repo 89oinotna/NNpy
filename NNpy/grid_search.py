@@ -135,7 +135,7 @@ def write_results(results, file_path):
 
     with open(file_path, 'w') as result_file:
         writer = csv.writer(result_file)
-        writer.writerow(['average_accuracy_vl', 'sd_accuracy_vl', 'average_metric_tr',
+        writer.writerow(['average_metric_vl', 'sd_metric_vl', 'average_metric_tr',
                          'network_topology'])
 
         for item in results:
