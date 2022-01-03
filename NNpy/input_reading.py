@@ -34,10 +34,12 @@ def read_cup(frac_train=0.8):
     test_data = cup_tr_dataset.tail(n_rows - train_data.shape[0])
     train_labels = pd.DataFrame([train_data.pop(x) for x in ['label_x', 'label_y']]).transpose()
     test_labels = pd.DataFrame([test_data.pop(x) for x in ['label_x', 'label_y']]).transpose()
+    """
     x = train_data.values  # returns a numpy array
     min_max_scaler = MinMaxScaler()
     data_scaled = min_max_scaler.fit_transform(x)
     train_data = pd.DataFrame(data_scaled)
+    """
     return train_data, train_labels.values, test_data, test_labels.values
 
 
@@ -50,8 +52,8 @@ def read_test_cup():
 
     cup_ts_dataset = pd.read_csv(test_path, sep=",", names=columns_ts_names, skiprows=7)
     cup_ts_dataset = cup_ts_dataset.sample(frac=1)
-    cup_ts_dataset.pop('id')
-    return cup_ts_dataset
+    id = cup_ts_dataset.pop('id')
+    return id, cup_ts_dataset
 
 
 if __name__ == "__main__":
