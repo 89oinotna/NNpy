@@ -181,8 +181,8 @@ class NeuralNetwork:
 
                 for j in range(int(np.ceil(tr.shape[0] / self.minibatch_size))):
                     # if last minibatch is smaller than minibatch_size
-                    batch_data = tr_data.iloc[j * self.minibatch_size:(j + 1) * self.minibatch_size - 1, :]
-                    batch_label = tr_label.iloc[(j * self.minibatch_size):((j + 1) * self.minibatch_size - 1), :]
+                    batch_data = tr_data.iloc[j * self.minibatch_size:(j + 1) * self.minibatch_size, :] #- 1, :]
+                    batch_label = tr_label.iloc[(j * self.minibatch_size):((j + 1) * self.minibatch_size),:]# - 1), :]
                     self.step(batch_data, batch_label)
                 # todo add the possibility to use the mean over last n batches
                 output = self.feed_forward(tr_data)
