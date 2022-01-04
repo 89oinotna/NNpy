@@ -150,6 +150,8 @@ class NeuralNetwork:
         monitoring = None
         tr = None
         labels_size=tr_label.shape[1]
+        predicted_values_tr = []
+        predicted_values_vl = []
         if self.minibatch_size is not None:  # to redo the splitting
             tr = pd.DataFrame(np.concatenate((tr_data, tr_label), axis=1))
 
@@ -186,6 +188,7 @@ class NeuralNetwork:
                     self.step(batch_data, batch_label)
                 # todo add the possibility to use the mean over last n batches
                 output = self.feed_forward(tr_data)
+                predicted_values_tr[i] = output
                 tr_loss.append(self.loss.error(tr_label, output))
                 tr_metric.append(self.metric(tr_label, output))
             else:
@@ -195,6 +198,7 @@ class NeuralNetwork:
 
             if vl_data is not None:
                 output = self.feed_forward(vl_data)
+                predicted_values_vl[i] = output
                 vl_loss.append(self.loss.error(vl_label, output))
                 vl_metric.append(self.metric(vl_label, output))
 
@@ -218,8 +222,8 @@ class NeuralNetwork:
                         logging.debug("The epoch ", i, " improved the model ", monitor)
 
         if vl_data is not None:
-            return (tr_metric, tr_loss), (vl_metric, vl_loss)
-        return tr_metric, tr_loss
+            return (tr_metric, tr_loss), (vl_metric, vl_loss), predicted_values_tr, predicted_values_vl
+        return tr_metric, tr_loss, predicted_values_tr
 
     def save(self, path='./', name=None):
         if name is None:
