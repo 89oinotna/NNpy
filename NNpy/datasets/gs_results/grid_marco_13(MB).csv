@@ -1,0 +1,301 @@
+average_metric_vl,sd_metric_vl,average_metric_tr,network_topology
+1.1437630601,0.056537704,"10    0.799505
+11    1.185128
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.1444217317,0.0468087551,"10    0.797895
+11    1.188795
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.2269020289,0.1123752647,"10    0.878240
+11    1.228868
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.3076605718,0.0623854415,"10    1.059812
+11    1.434402
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.3290727776,0.2714819476,"10    1.149525
+11    1.643347
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.3736199723,0.0871141168,"10    1.196896
+11    1.460535
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.3918473714,0.1100925026,"10    1.319573
+11    1.341819
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.3974276868,0.191603966,"10    1.229846
+11    1.659790
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.4365898527,0.1344910508,"10    1.374198
+11    1.474465
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.459055857,0.0949001369,"10    1.382047
+11    1.519660
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.523060679,0.1391963797,"10    1.511002
+11    1.558970
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.5753493995,0.2546628469,"10    1.562255
+11    1.757909
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.5786388865,0.2207217855,"10    1.679856
+11    1.593696
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.5809926662,0.1348397432,"10    1.748537
+11    1.488106
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.6185502508,0.1194647865,"10    1.794741
+11    1.638947
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.6360745251,0.1262462221,"10    1.771176
+11    1.878032
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.6477557468,0.1659892558,"10    1.959411
+11    1.495145
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.6654561091,0.451777184,"10    1.505723
+11    2.356895
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.6781270554,0.1726848758,"10    1.892596
+11    1.932214
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.679659136,0.1515469533,"10    2.043625
+11    1.787237
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.6910614496,0.1448892708,"10    1.818933
+11    1.991655
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.7451447419,0.3458869295,"10    2.100438
+11    2.014523
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.8019695254,0.274049451,"10    2.076340
+11    2.344308
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.8125334439,0.1540437308,"10    2.342217
+11    2.232079
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.8379917071,0.4777310501,"10    2.210299
+11    2.249309
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.8973660461,0.3267049412,"10    2.780761
+11    1.598305
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.9459032321,0.2955215418,"10    2.136342
+11    3.124067
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+1.9605722503,0.2121443583,"10    2.812090
+11    2.027045
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.035101042,0.4305775755,"10    2.314333
+11    3.270048
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.0416746615,0.4354879518,"10    3.142411
+11    2.322925
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.0623111725,0.7199932997,"10    3.253739
+11    2.863130
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.1503832981,0.1089700753,"10    3.564756
+11    2.003399
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.2073915887,0.9975327321,"10    2.349104
+11    4.758496
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.2089917964,0.4329570433,"10    3.705833
+11    2.521599
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.2410331698,0.500043029,"10    3.862829
+11    2.516391
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.2873461365,0.1850456928,"10    4.276120
+11    2.044683
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.3538104465,0.1287185113,"10    4.402007
+11    2.094083
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.3597073824,0.1437357276,"10    4.705350
+11    2.160982
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.4324570285,0.101931596,"10    5.355280
+11    1.573521
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.5438711288,0.6355254018,"10    4.461196
+11    4.700598
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.58626721,0.3739684376,"10    4.579831
+11    3.436994
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.5999204723,0.143967555,"10    5.457209
+11    2.422410
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.6860331897,0.2834560946,"10    6.552598
+11    2.113327
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.7046140012,0.418289203,"10    3.948566
+11    5.328757
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.7587356482,0.28641384,"10    6.071722
+11    2.859977
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.7629220075,0.1897055685,"10    7.687316
+11    1.536982
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.7654055545,0.4304434599,"10    4.584677
+11    4.892206
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.7912762692,0.2957024659,"10    7.418428
+11    1.935178
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.8790107375,0.5681401469,"10    5.792461
+11    5.423129
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.9057570165,0.1539607136,"10    6.856192
+11    3.854567
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.9197279595,0.140064262,"10    6.952542
+11    3.946234
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+2.9857736114,0.1849949584,"10    5.942011
+11    4.597085
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.0078599191,0.4006637855,"10    6.537552
+11    5.219755
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.0188918409,0.2319244879,"10    7.381993
+11    3.434224
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.073596583,0.262408784,"10    7.125318
+11    4.033099
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.0838400216,0.3388105922,"10    6.620455
+11    4.397204
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.0988304132,0.2609086066,"10    7.272117
+11    5.157570
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.1116131721,0.5551023809,"10    4.702654
+11    7.841985
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.180427839,0.2168932718,"10    8.216977
+11    3.352209
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.1865726513,0.2115846404,"10    7.839527
+11    4.177299
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.1980334749,0.2364225878,"10    7.249263
+11    4.169011
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.2074780904,0.2149902279,"10    8.136113
+11    4.971461
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.2545816126,1.0552692587,"10    7.093705
+11    7.149289
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.3072220512,2.2070569538,"10     5.267568
+11    12.233725
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.3101825363,0.6056935752,"10    6.15989
+11    7.77855
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.3136253906,0.1457945179,"10    8.131223
+11    5.940187
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.3271227017,0.3044946336,"10    7.479002
+11    5.085332
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.4020511468,0.1632786005,"10    8.218881
+11    4.917090
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.4027486185,0.2527528007,"10    7.851444
+11    5.785461
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.4113266306,0.1719480927,"10    9.021148
+11    4.312195
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.4127736457,0.2529313171,"10    8.261098
+11    6.580776
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.552990594,0.2177516438,"10    8.760249
+11    6.364744
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.6208269055,1.7624038034,"10     6.565232
+11    13.778288
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.6570032183,0.2202417528,"10    9.189160
+11    6.326758
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.6873584316,0.8476431503,"10    8.419320
+11    8.711598
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.7223445451,0.4000712052,"10    8.832700
+11    6.507123
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+3.810469712,0.381948043,"10    8.645803
+11    8.674275
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+4.0812296825,1.7261146648,"10     6.961930
+11    15.961479
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+4.5368154606,1.3178664504,"10     8.856815
+11    19.938008
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+4.6037745707,2.1707975544,"10     6.954500
+11    24.583864
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+4.6801713553,1.1627997322,"10     8.477468
+11    21.007337
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'sigmoid', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+4.7389199347,1.5829949872,"10     7.785447
+11    23.963335
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+4.8624205386,2.0303347666,"10     6.313049
+11    27.691308
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+5.5692576942,1.4876012049,"10     9.857850
+11    29.439055
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+5.7510511114,2.0288767236,"10     8.099323
+11    34.302694
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+5.9847686289,1.7265567008,"10     8.862796
+11    35.041678
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0.05, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+5.9994964989,1.8674272875,"10     8.277483
+11    37.550087
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+6.4960318894,1.5285531549,"10     8.710359
+11    44.681714
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.005, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.005, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+6.5990965752,1.324589052,"10     8.930493
+11    44.821706
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+6.6870814186,1.156773596,"10     9.447795
+11    45.570475
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+6.7364039646,1.2194496053,"10     9.746034
+11    43.783185
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+6.8556687754,0.8329868486,"10     8.839943
+11    47.082146
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0.1, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+7.1455322575,0.4463356709,"10     8.571515
+11    53.378422
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+7.1916370179,0.4921997699,"10     7.746234
+11    53.509014
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+7.3139954821,0.310221552,"10     8.997373
+11    53.390053
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+7.3147203508,0.3144774818,"10     8.997304
+11    53.389530
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0.0001}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+7.316150307,0.3103139054,"10     8.997310
+11    53.389574
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.01, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.01, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+7.3184493046,0.3097955918,"10     8.996528
+11    53.391099
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.03, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.03, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+7.319707887,0.3131330363,"10     8.997029
+11    53.391110
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.1, 'ALPHA': 0.2, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.1, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
+7.3206377169,0.3064211552,"10     8.997411
+11    53.399568
+dtype: float64","{'layer_sizes': (40, 40, 2), 'act_hidden': 'tanh', 'act_out': 'id', 'w_init': 'xavier', 'loss': 'mse', 'metric': 'mee', 'optimizer': {'type_init': 'sgd', 'ETA': 0.05, 'ALPHA': 0.4, 'momentum_window': 40, 'weight_regularizer': {'type_init': 'tikonov', 'LAMBDA': 0}, 'variable_eta': {'eta_tau': 0.001, 'tau': 200, 'eta': 0.05, 'step': 200}}, 'minibatch_size': 32, 'epochs': 500, 'input_size': 10}"
