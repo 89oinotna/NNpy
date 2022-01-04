@@ -9,7 +9,7 @@ test_index, test_data = read_test_cup()
 
 
 def create_output_file(file_path, test_prediction):
-    with open(file_path, 'w') as result_file:
+    with open(file_path, 'w', newline="") as result_file:
         writer = csv.writer(result_file)
         writer.writerow(['# Roberto Esposito, Marco Mazzei, Antonio Zegarelli'])
         writer.writerow(['# Team_Overflow'])

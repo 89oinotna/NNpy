@@ -1,3 +1,4 @@
+import write_results as wr
 import ensembling as en
 import network as nn
 import input_reading
@@ -144,7 +145,7 @@ train_data, valid_data, train_labels, valid_labels = train_test_split(train_data
 ensemble = en.Bagging(sample_size=len(train_data), models=[network_1, network_2, network_3, network_4, network_5,
                                                            network_6, network_7, network_8, network_9, network_10,
                                                            network_11])
-'''
+
 final_training_error, final_validation_error, final_training_accuracy, final_validation_accuracy = \
     ensemble.fit(train_data, train_labels, valid_data, valid_labels)
 
@@ -152,10 +153,15 @@ print("Final training error: ", final_training_error)
 print("Final Validation error: ", final_validation_error)
 print("Final training accuracy: ", final_training_accuracy)
 print("Final validation accuracy: ", final_validation_accuracy)
-'''
+
+test_index, test_data = input_reading.read_test_cup()
+
+wr.create_output_file("Team_Overflow_ML-CUP21-TS.csv", ensemble.predict(test_data))
+
 # print(metrics.report_score(valid_labels, ensemble.predict(valid_data)))
-for i, model in enumerate(ensemble.models):
+'''for i, model in enumerate(ensemble.models):
     (tr_metric, tr_loss), (vl_metric, vl_loss) = model.fit(train_data, train_labels, valid_data, valid_labels,
                                                            early_stopping=True)
     vis.plot(tr_loss, vl_loss, tr_metric, vl_metric, i)
-    model.save(name=i)
+    model.save(name="Model " + str(i))
+'''
