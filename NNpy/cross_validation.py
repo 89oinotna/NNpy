@@ -2,7 +2,6 @@ import numpy as np
 import math
 
 from NNpy.network import NeuralNetwork
-from normalization import denormalize
 import metrics
 import copy
 import logging
@@ -54,17 +53,16 @@ def k_fold_cross_validation(model, train_set, train_label, n_folds, fit_params=N
         model (NeuralNetwork): neural network from each fold iteration start
         training_set (array of tuple): data for training
         n_folds (int): number of folds
-        den_label ((float, float), optional): tuple of the form (mean, variance) used for denormalization.
-        Defaults to None. If not indicated, cross-validation does not perform any
-        denormalization.
 
     Returns:
         (float64, float64, float64, array):
-            * mean validation error
-            * standard deviation over the validation error
-            * the mean training error when the validation error was minimum
+            * mean validation metric
+            * standard deviation over the validation metric
+            * mean training metric
             * list of all the results
     """
+    # * the mean training error when the validation error was minimum
+
     # output of the cross validation
     metric_res = {'tr': np.zeros(n_folds),
                   'vl': np.zeros(n_folds)}
