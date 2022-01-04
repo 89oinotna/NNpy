@@ -39,7 +39,7 @@ class Bagging:
         """
         self.models.append(model)
 
-    def fit(self, tr_data, tr_label, validation_data=None, validation_label=None, test_set=None):
+    def fit(self, tr_data, tr_label, validation_data=None, validation_label=None, test_set=None, max_epochs=0):
         """performs training of the models
 
         Args:
@@ -55,10 +55,24 @@ class Bagging:
         for i in range(0, len(self.models)):
             # if bootstrap is true then perform _generate_sample(Bootstrap with resampling), otherwise we simply use
             # the original training set
-            results_model_i = self.models[i].fit(tr_data, tr_label, validation_data, validation_label, early_stopping=True) \
-                if self.bootstrap else self.models[i].fit(tr_data, tr_label, validation_data, validation_label, early_stopping=True)
+            results_model_i = self.models[i].fit(tr_data, tr_label, validation_data, validation_label, early_stopping=True, return_outputs=True) \
+                if self.bootstrap else self.models[i].fit(tr_data, tr_label, validation_data, validation_label, early_stopping=True, return_outputs=True)
 
             training_results.append(results_model_i)
+
+        # fill values
+        for i, (tr_metric, tr_loss), (vl_metric, vl_loss), (tr_outputs, vl_outputs) in training_results:
+            ll =len(tr_metric)
+            if ll < max_epochs:
+                diff = (max_epochs - ll)
+                tr_metric.extend([tr_metric[-1]] * diff)
+                vl_metric.extend([vl_metric[-1]] * diff)
+                tr_loss.extend([tr_loss[-1]] * diff)
+                vl_loss.extend([vl_loss[-1]] * diff)
+                tr_outputs.extend([tr_outputs[-1]] * diff)
+                vl_outputs.extend([vl_outputs[-1]] * diff)
+
+
 
         # calculate the mean of every result
         final_training_error = np.mean([training_result[0][1][-1] for training_result in training_results], axis=0)
