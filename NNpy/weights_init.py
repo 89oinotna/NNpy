@@ -35,7 +35,7 @@ def monk_init(num_unit, num_input):
     return matrix_weights
 
 
-def random_ranged_init(num_unit, num_input, range=(-0.7, 0.7), **kwargs):
+def random_ranged_init(num_unit, num_input, range=(-0.05, 0.05), **kwargs):
     min_range, max_range = range[0], range[1]
     if min_range > max_range:
         raise ValueError('The min value must be <= than the max value')

@@ -35,10 +35,10 @@ def read_cup(frac_train=0.8):
     train_labels = pd.DataFrame([train_data.pop(x) for x in ['label_x', 'label_y']]).transpose()
     test_labels = pd.DataFrame([test_data.pop(x) for x in ['label_x', 'label_y']]).transpose()
     """
-    x = train_data.values  # returns a numpy array
-    min_max_scaler = MinMaxScaler()
-    data_scaled = min_max_scaler.fit_transform(x)
-    train_data = pd.DataFrame(data_scaled)
+    #x = train_data.values  # returns a numpy array
+    #min_max_scaler = MinMaxScaler()
+    #data_scaled = min_max_scaler.fit_transform(x)
+    #train_data = pd.DataFrame(data_scaled)
     """
     return train_data, train_labels.values, test_data, test_labels.values
 
