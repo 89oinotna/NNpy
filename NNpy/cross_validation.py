@@ -49,9 +49,10 @@ def k_fold_cross_validation(model, train_set, train_label, n_folds, fit_params=N
     """cross validation implementation
 
     Args:
+        train_label: labels of the training data
         fit_params: parameters for the fit method of the model
-        model (NeuralNetwork): neural network from each fold iteration start
-        training_set (array of tuple): data for training
+        model (dict): neural network parameters
+        train_set: (array of tuple): data for training
         n_folds (int): number of folds
 
     Returns:

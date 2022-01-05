@@ -39,8 +39,6 @@ def init_model(nn_params):
 
         Param:
             nn_params(dict): dictionary of params to use to create NN object
-            num_features(int): number of features
-            output_dim(int): dimension of the output
             
         Return a NN model with also complete graph topology of the network
     """
@@ -54,6 +52,11 @@ def grid_search_cv(params, train_set, train_label, fit_params=None, n_threads=4,
         Use multiprocessing library to do a parallel execution
 
         Param:
+            params(dict): dict of params to use for the grid search
+            train_set
+            train_labels
+            fit_params(dict): dict of params to pass to the fit method
+            n_threads: number of threads to use
             save_path(str): string of file path
             name(str): name of the grid search, default will be grid_{hash(params)}
 
@@ -148,106 +151,3 @@ def write_results(results, file_path):
         print(f'Saved results in {file_path}')
 
 
-""""""
-
-
-def final_model():
-    """
-        Return the final model by bagging the best 10/20 models
-    """
-
-    # model params contains the best hyperparameters obtained with the final grid search
-    # nn_params = [
-    """
-     BEST 10 or 20 models
-     
-     List of this type:
-     
-         [(20, 20), act_fun.Relu, winit.random_ranged_init, losses.MeanSquaredError, 
-          metrics.MEE, 0.2, 0.01, 0.1, 10, optimizers.SGD, 1300],
-
-         [(20, 20), act_fun.Relu, winit.random_ranged_init, losses.MeanSquaredError, 
-          metrics.MEE, 0.2, 0.01, 0.1, 10, optimizers.SGD, 1300],
-
-         [(20, 20), act_fun.Relu, winit.random_ranged_init, losses.MeanSquaredError, 
-          metrics.MEE, 0.2, 0.01, 0.1, 10, optimizers.SGD, 1300], ...
-
-         [(20, 20), act_fun.Relu, winit.random_ranged_init, losses.MeanSquaredError, 
-          metrics.MEE, 0.2, 0.01, 0.1, 10, optimizers.SGD, 1300],
-            """
-    #    ]
-
-    # Reading and normalizing data from the ML cup
-    # We used 80% of the data for training and the remaining 20% for test
-    """train_data, train_label, test_data, test_label = read_cup(
-        training=True, test=False, frac_train=0.8)
-    train_data, train_label, den_data, den_label = normalize(train_data, train_label)
-    test_data, test_label, _, _ = normalize(test_data, test_label, den_data, den_label)
-
-    training_examples = list(zip(train_data, train_label))
-    test_examples = list(zip(test_data, test_label))
-
-    model_test = init_model(nn_params[0], len(train_data[0]), 2)
-    results = model_test.fit(train_data, train_label, test_data, test_label)
-    #TODO: plot accuracy of results
-
-    # create an ensemble object that will contain all the hypothesis
-    ensemble = Bagging(len(training_examples))
-
-    # create and add the model to the ensemble
-
-    for params in nn_params:
-        network = init_model(params, len(train_data[0]), 2)
-        ensemble.add_neural_network(network)
-
-    # training all the models in the ensemble
-
-    ensemble.fit(train_data, train_label, test_examples)
-
-    # check models performance (denormalizing)
-    MEE = metrics.MEE()
-    i = 1
-    for model in ensemble.models:
-        predicted_training_data = denormalize(
-            model.predict(train_data), den_label)
-        error = MEE.error(
-            output=predicted_training_data,
-            label=denormalize(train_label, den_label)
-        )
-        print("model ", i, ", training: ", error)
-
-        predicted_test_data = denormalize(
-            model.predict(test_data), den_label)
-        error = MEE.error(
-            output=predicted_test_data,
-            label=denormalize(test_label, den_label)
-        )
-
-        print("model ", i, ", test: ", error)
-        i += 1
-
-    # check ensemble performance
-
-    predicted_training_data = denormalize(
-        ensemble.predict(train_data), den_label)
-    error = MEE.error(
-        output=predicted_training_data,
-        label=denormalize(train_label, den_label)
-    )
-    print("ensemble training: ", error)
-
-    predicted_test_data = denormalize(
-        ensemble.predict(test_data), den_label)
-    error = MEE.error(
-        output=predicted_test_data,
-        label=denormalize(test_label, den_label)
-    )
-
-    print("ensemble test: ", error)
-
-    return ensemble
-
-
-final_model()
-"""
-    # grid_search_cv(params_grid, training_set, len(train_data[0]), len(train_label[0]))

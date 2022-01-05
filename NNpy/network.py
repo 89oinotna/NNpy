@@ -245,10 +245,3 @@ class NeuralNetwork:
     def load(path='./', name=None):
         return pickle.load(open(f'{path}{name}.pkl', 'rb'))
 
-    """
-
-    Using mini-batch → the gradient does not decrease to zero close to a
-minimum (as the exact gradient can do)
-• Hence fixed learning rate should be avoided:
-• For instance, we can decay linearly eta for each step until iteration
-    """
