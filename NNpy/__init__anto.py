@@ -49,14 +49,11 @@ monk={'layer_sizes': [(15, 1)],
        'metric': ['simple_class'],
        'optimizer': {
            'type_init': ['sgd'],
-           'nesterov':[True, False],
+           'nesterov':[False],
            'ETA': list(np.linspace(0.1, 0.9, 9)),
            'ALPHA': list(np.linspace(0.1, 0.9, 9)),
            #'momentum_window': [40],
-           'weight_regularizer': {
-               'type_init': ['tikonov'],
-               'LAMBDA': [0, 0.0001, 0.001, 0.01, 0.1]
-           },
+
            #'variable_eta': {
            #    'tau': [0.001],
            #    'step': [200],
@@ -72,14 +69,13 @@ monk={'layer_sizes': [(15, 1)],
 #    train_data, train_label, test_size=0.2)
 
 if __name__ == '__main__':
-    train_data, train_labels, test_data, test_labels = read_cup(frac_train=0.8)  # read_monk("monks-1.train")
-    train_data, valid_data, train_labels, valid_labels = train_test_split(
-        train_data, train_labels, test_size=0.2)
-
-    #train_data, train_labels, test_data, test_labels = read_monk("monks-3")
+    #train_data, train_labels, test_data, test_labels = read_cup(frac_train=0.8)  # read_monk("monks-1.train")
     #train_data, valid_data, train_labels, valid_labels = train_test_split(
     #    train_data, train_labels, test_size=0.2)
-    grid_results = gs.grid_search_cv(cup, train_data.values, train_labels)
+
+    train_data, train_labels, test_data, test_labels = read_monk("monks-2")
+
+    grid_results = gs.grid_search_cv(monk, train_data, train_labels)
 
     # grid_results = pd.read_csv("datasets/gs_results/grid_antonio_2.csv", sep=",")
 

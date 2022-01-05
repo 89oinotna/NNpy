@@ -13,22 +13,18 @@ from sklearn.model_selection import train_test_split
 
 # logging.basicConfig(level=logging.DEBUG)
 
-monk = {'layer_sizes': [15, 1],
-  'act_hidden': 'relu',
-  'act_out': 'sigmoid',
-  'w_init': 'monk',
-  'loss': 'mse',
-  'metric': 'simple_class',
-  'optimizer': {'type_init': 'sgd',
-                'ETA': 0.6,#0.6635102010030304,
-                'ALPHA': 0.9,#0.8222229742182763,
-                'nesterov': True,
-                #'weight_regularizer': {'type_init': 'tikonov',
-             #                       'LAMBDA': 0.00001,#0.0009853357940222962
-              #                       },
-},
-'epochs': 500,
-'input_size': 17}
+monk = {'layer_sizes': [4, 1],
+                  'act_hidden': 'tanh',
+                  'act_out': 'sigmoid',
+                  'w_init': 'monk',
+                  'loss': 'mse',
+                  'metric': 'simple_class',
+                  'optimizer': {'type_init': 'sgd',
+                                'ETA': 0.8,#0.6635102010030304,
+                                'ALPHA': 0.9,#0.8222229742182763,
+                                'nesterov': False,
+                                },
+                 'epochs': 500, 'input_size': 17}
 
 
 cup = {'layer_sizes': (10, 70, 30, 2),
@@ -61,19 +57,28 @@ if __name__ == '__main__':
     #train_data, valid_data, train_labels, valid_labels = train_test_split(
     #        train_data, train_labels, test_size=0.2)
 
-    train_data, train_labels, test_data, test_labels = read_monk("monks-1")
+    train_data, train_labels, test_data, test_labels = read_monk("monks-2")
     train_data, valid_data, train_labels, valid_labels = train_test_split(
         train_data, train_labels, test_size=0.2)
 
     #train_data, train_labels, test_data, test_labels = read_monk('monks-1')
     #train_data, valid_data, train_labels, valid_labels = train_test_split(
     #    train_data, train_labels, test_size=0.2, random_state=1)
+    bm = None
+    for i in range(2):
+        network = nn.NeuralNetwork.init(**monk)
 
-    network = nn.NeuralNetwork.init(**monk)
-
-    (tr_metric, tr_loss), (vl_metric, vl_loss) = network.fit(train_data, train_labels, valid_data, valid_labels)
+        (tr_metric, tr_loss), (vl_metric, vl_loss) = network.fit(train_data, train_labels, valid_data, valid_labels)
                                                              #, early_stopping=True, monitor='vl_metric', patience=50)
-    vis.plot(tr_loss, vl_loss, tr_metric, vl_metric)
+        if i==0:
+            bm = network
+            best = (tr_metric, tr_loss), (vl_metric, vl_loss)
+        if vl_metric[-1] < best[1][0][-1]:
+            best = (tr_metric, tr_loss), (vl_metric, vl_loss)
+            bm = network
+    (tr_metric, tr_loss), (vl_metric, vl_loss) = best
+    print(f'Test {bm.evaluate(test_data, test_labels)}')
+    vis.plot(tr_loss, vl_loss, tr_metric, vl_metric, op=max)
     # grid_results = pd.read_csv("./grid_antonio_1.csv", sep=",")
     # print(grid_results.head())
 
