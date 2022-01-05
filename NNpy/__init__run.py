@@ -14,20 +14,21 @@ from sklearn.model_selection import train_test_split
 # logging.basicConfig(level=logging.DEBUG)
 
 monk = {'layer_sizes': [15, 1],
-                  'act_hidden': 'sigmoid',
-                  'act_out': 'sigmoid',
-                  'w_init': 'monk',
-                  'loss': 'mse',
-                  'metric': 'simple_class',
-                  'optimizer': {'type_init': 'sgd',
-                                'ETA': 0.2,#0.6635102010030304,
-                                'ALPHA': 0.9,#0.8222229742182763,
-                                'nesterov': True,
-                                'weight_regularizer': {'type_init': 'tikonov',
-                                                       'LAMBDA':0.00001,#0.0009853357940222962
-                                                       },
-                                },
-                 'epochs': 500, 'input_size': 17}
+  'act_hidden': 'relu',
+  'act_out': 'sigmoid',
+  'w_init': 'monk',
+  'loss': 'mse',
+  'metric': 'simple_class',
+  'optimizer': {'type_init': 'sgd',
+                'ETA': 0.6,#0.6635102010030304,
+                'ALPHA': 0.9,#0.8222229742182763,
+                'nesterov': True,
+                #'weight_regularizer': {'type_init': 'tikonov',
+             #                       'LAMBDA': 0.00001,#0.0009853357940222962
+              #                       },
+},
+'epochs': 500,
+'input_size': 17}
 
 
 cup = {'layer_sizes': (10, 70, 30, 2),
@@ -60,7 +61,7 @@ if __name__ == '__main__':
     #train_data, valid_data, train_labels, valid_labels = train_test_split(
     #        train_data, train_labels, test_size=0.2)
 
-    train_data, train_labels, test_data, test_labels = read_monk("monks-3")
+    train_data, train_labels, test_data, test_labels = read_monk("monks-1")
     train_data, valid_data, train_labels, valid_labels = train_test_split(
         train_data, train_labels, test_size=0.2)
 
