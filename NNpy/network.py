@@ -126,7 +126,7 @@ class NeuralNetwork:
         return (self.loss.error(label, output)), (self.metric(label, output))
 
     def fit(self, tr_data, tr_label, vl_data=None, vl_label=None, early_stopping=False, monitor="vl_loss",
-            min_delta=0.001, patience=20, mode="min"):
+            min_delta=0.001, patience=20, mode="min", return_outputs=False):
         """
         training algorithm
 
@@ -149,7 +149,9 @@ class NeuralNetwork:
         vl_metric = []
         monitoring = None
         tr = None
-        labels_size=tr_label.shape[1]
+        labels_size = tr_label.shape[1]
+        tr_outputs = []  # predicted
+        vl_outputs = []  # predicted
         if self.minibatch_size is not None:  # to redo the splitting
             tr = pd.DataFrame(np.concatenate((tr_data, tr_label), axis=1))
 
@@ -181,20 +183,27 @@ class NeuralNetwork:
 
                 for j in range(int(np.ceil(tr.shape[0] / self.minibatch_size))):
                     # if last minibatch is smaller than minibatch_size
-                    batch_data = tr_data.iloc[j * self.minibatch_size:(j + 1) * self.minibatch_size - 1, :]
-                    batch_label = tr_label.iloc[(j * self.minibatch_size):((j + 1) * self.minibatch_size - 1), :]
+                    batch_data = tr_data.iloc[j * self.minibatch_size:(j + 1) * self.minibatch_size, :]  # - 1, :]
+                    batch_label = tr_label.iloc[(j * self.minibatch_size):((j + 1) * self.minibatch_size),
+                                  :]  # - 1), :]
                     self.step(batch_data, batch_label)
                 # todo add the possibility to use the mean over last n batches
                 output = self.feed_forward(tr_data)
+                if return_outputs:
+                    tr_outputs.append(output)
                 tr_loss.append(self.loss.error(tr_label, output))
                 tr_metric.append(self.metric(tr_label, output))
             else:
                 output = self.step(tr_data, tr_label)
+                if return_outputs:
+                    tr_outputs.append(output)
                 tr_loss.append(self.loss.error(tr_label, output))
                 tr_metric.append(self.metric(tr_label, output))
 
             if vl_data is not None:
                 output = self.feed_forward(vl_data)
+                if return_outputs:
+                    vl_outputs.append(output)
                 vl_loss.append(self.loss.error(vl_label, output))
                 vl_metric.append(self.metric(vl_label, output))
 
@@ -218,14 +227,19 @@ class NeuralNetwork:
                         logging.debug("The epoch ", i, " improved the model ", monitor)
 
         if vl_data is not None:
-            return (tr_metric, tr_loss), (vl_metric, vl_loss)
-        return tr_metric, tr_loss
+            if return_outputs:
+                return (tr_metric, tr_loss), (vl_metric, vl_loss), (tr_outputs, vl_outputs)
+            else:
+                return (tr_metric, tr_loss), (vl_metric, vl_loss)
+        if return_outputs:
+            return tr_metric, tr_loss, tr_outputs
+        else:
+            return tr_metric, tr_loss
 
     def save(self, path='./', name=None):
         if name is None:
-            name=str(hash(self))
+            name = str(hash(self))
         pickle.dump(self, open(f'{path}{name}.pkl', 'wb'))
-
 
     @staticmethod
     def load(path='./', name=None):

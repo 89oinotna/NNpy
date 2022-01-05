@@ -35,6 +35,7 @@ class SGD(Optimizer):
                  nesterov: bool = False, momentum_window: int = None, variable_eta: dict = None):
         if variable_eta is not None:
             variable_eta['eta'] = ETA  # eta 0
+            variable_eta['step'] = 0
         self.variable_eta = variable_eta
         self.ETA = ETA
         self.nesterov = nesterov

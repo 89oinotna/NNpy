@@ -39,7 +39,7 @@ class Bagging:
         """
         self.models.append(model)
 
-    def fit(self, tr_data, tr_label, validation_data=None, validation_label=None, test_set=None):
+    def fit(self, tr_data, tr_label, validation_data=None, validation_label=None, test_set=None, max_epochs=0):
         """performs training of the models
 
         Args:
@@ -59,6 +59,7 @@ class Bagging:
                 if self.bootstrap else self.models[i].fit(tr_data, tr_label, validation_data, validation_label, early_stopping=True)
 
             training_results.append(results_model_i)
+
 
         # calculate the mean of every result
         final_training_error = np.mean([training_result[0][1][-1] for training_result in training_results], axis=0)
